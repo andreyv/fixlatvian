@@ -1,0 +1,144 @@
+%%
+%% This is file `fixlatvian.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% fixlatvian.dtx  (with options: `package')
+%% 
+%% Copyright (C) Andrey Vihrov <andrey.vihrov@gmail.com>, 2010
+%% Copyright (C) Madars Virza <madars@gmail.com>, 2010
+%% 
+%% This file may be distributed and/or modified under the conditions of
+%% the LaTeX Project Public License, either version 1.2 of this license
+%% or (at your option) any later version.  The latest version of this
+%% license is in:
+%% 
+%%    http://www.latex-project.org/lppl.txt
+%% 
+%% and version 1.2 or later is part of all distributions of LaTeX version
+%% 1999/12/01 or later.
+%% 
+\NeedsTeXFormat{LaTeX2e}[2009/09/24]
+\ProvidesPackage{fixlatvian}
+  [2010/07/04 v0 Improved Latvian support]
+\RequirePackage{polyglossia}
+\setdefaultlanguage{latvian}
+\RequirePackage{xstring}
+\RequirePackage{etoolbox}
+\RequirePackage{indentfirst}
+\newcommand{\FixL@warning}[1]{%
+  \PackageWarning{fixlatvian}{#1}}
+\newcommand{\FixL@warning@noline}[1]{%
+  \PackageWarningNoLine{fixlatvian}{#1}}
+\newif\ifFixL@hyperref@before
+\@ifpackageloaded{hyperref}{\FixL@hyperref@beforetrue}{}
+\AtBeginDocument{%
+  \@ifpackageloaded{hyperref}{%
+    \ifFixL@hyperref@before%
+    \else%
+      \FixL@warning@noline{%
+        This package should be loaded after \space hyperref%
+      }%
+    \fi%
+  }{}}
+\newcommand{\FixL@alnum}{%
+  ABCDEFGHIJKLMNOPQRSTUVWXYZ%
+  abcdefghijklmnopqrstuvwxyz%
+  0123456789%
+}
+\CheckCommand*{\@seccntformat}[1]{\csname the#1\endcsname\quad}
+\renewcommand{\@seccntformat}[1]{%
+  \csname the#1\endcsname.\hspace{.66667em}}
+\let\FixL@save@numberline\numberline
+\renewcommand{\numberline}[1]{%
+  \StrRight{#1}{1}[\FixL@temp@a]%
+  \FixL@save@numberline{#1%
+    \IfSubStr{\FixL@alnum}{\FixL@temp@a}{.}{}%
+  }}
+\AtBeginDocument{%
+  \let\nref\ref%
+  \let\npageref\pageref%
+}
+\newcommand{\FixL@ref@base}[4]{%
+  \begingroup%
+    \newcommand{\FixL@temp@b}{\csname n#1\endcsname#2{#4}.}%
+    \IfStrEq{#3}{hyper}{%
+      \hyperref[#4]{\FixL@temp@b}%
+    }{%
+      \FixL@temp@b%
+    }%
+  \endgroup%
+  \nobreakspace\ignorespaces%
+}
+\AtBeginDocument{%
+  \@ifpackageloaded{hyperref}{%
+    \newcommand{\FixL@ref}[1]{\FixL@ref@base{ref}{*}{hyper}{#1}}%
+    \newcommand{\FixL@ref@star}[1]{\FixL@ref@base{ref}{*}{}{#1}}%
+    \renewcommand{\ref}{\@ifstar\FixL@ref@star\FixL@ref}%
+    \newcommand{\FixL@pageref}[1]{\FixL@ref@base{pageref}{*}{hyper}{#1}}%
+    \newcommand{\FixL@pageref@star}[1]{\FixL@ref@base{pageref}{*}{}{#1}}%
+    \renewcommand{\pageref}{\@ifstar\FixL@pageref@star\FixL@pageref}%
+  }{%
+    \renewcommand{\ref}[1]{\FixL@ref@base{ref}{}{}{#1}}%
+    \renewcommand{\pageref}[1]{\FixL@ref@base{pageref}{}{}{#1}}%
+  }}
+\@ifundefined{@makechapterhead}{}{%
+  \patchcmd{\@makechapterhead}{%
+    \@chapapp\space \thechapter%
+  }{%
+    \IfStrEq{\@chapapp}{\appendixname}{%
+      \@chapapp\space\thechapter%
+    }{%
+      \thechapter.\ \@chapapp%
+    }%
+  }{}{}}
+\newcommand{\FixL@fix@part}[1]{%
+  \@ifundefined{#1}{}{%
+    \renewcommand{\thepart}{\arabic{part}}%
+    \expandafter\patchcmd\csname#1\endcsname{%
+      \partname\nobreakspace\thepart%
+    }{%
+      \thepart.\nobreakspace\partname%
+    }{}{}}}
+\AtBeginDocument{%
+  \@ifpackageloaded{hyperref}{%
+    \FixL@fix@part{H@old@part}%
+  }{%
+    \FixL@fix@part{@part}%
+  }}
+\newcommand{\FixL@translate}[3]{%
+  \AtBeginDocument{%
+    \@ifpackageloaded{#1}{%
+      \expandafter\renewcommand\csname#2\endcsname{#3}%
+    }{}%
+  }}
+\gappto\captionslatvian{%
+  \renewcommand{\chaptername}{nodaļa}%
+  \renewcommand{\indexname}{Rādītājs}%
+  \renewcommand{\partname}{daļa}%
+  \renewcommand{\alsoname}{sk.~arī}%
+}
+\FixL@translate{algorithm}{listalgorithmname}{Algoritmu saraksts}
+\FixL@translate{algorithm}{ALG@name}{Algoritms}
+\FixL@translate{appendix}{appendixtocname}{Pielikumi}
+\newcommand{\FixL@doc@glossaryname}{Izmaiņu saraksts}
+\FixL@translate{doc}{glossary@prologue}{%
+  \section*{\FixL@doc@glossaryname}%
+  \markboth{\FixL@doc@glossaryname}{\FixL@doc@glossaryname}%
+}
+\FixL@translate{doc}{index@prologue}{%
+  \section*{\indexname}%
+  \markboth{\indexname}{\indexname}%
+  Numuri kursīvā apzīmē lappusi, kurā aprakstīta attiecīgā komanda;
+  pasvītrotie numuri norāda uz komandas \ifcodeline@index definīcijas
+  pirmkoda rindu\else definīciju\fi; numuri parastajā rakstā apzīmē
+  \ifcodeline@index pirmkoda rindu\else lappusi\fi, kurā komanda tiek
+  izmantota.%
+}
+\FixL@translate{doc}{generalname}{Vispārīgs ieraksts}
+\FixL@translate{listings}{lstlistlistingname}{Pirmkoda tekstu saraksts}
+\FixL@translate{listings}{lstlistingname}{Pirmkoda teksts}
+\endinput
+%%
+%% End of file `fixlatvian.sty'.
