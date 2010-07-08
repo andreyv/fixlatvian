@@ -111,14 +111,14 @@
 % pēc \textsf{Hyperref} pakotnes, ja tāda tiek izmantota.
 %
 % \subsection{Numerācija ar punktiem}
-% \label{numbering}
+% \label{sec:numbering}
 % \DescribeMacro{\ref}
 % \DescribeMacro{\pageref}
 % Pēc automātiski izveidotajiem numuriem (nodaļas, sekcijas, attēli, utt.)
-% tiek likti punkti (piem., ``\ref{numbering} apakšnodaļa''). Tie parādās
+% tiek likti punkti (piem., ``\ref{sec:numbering} apakšnodaļa''). Tie parādās
 % virsrakstu numerācijā, saturā un citos sarakstos, kā arī lietojot ierastās
 % |\ref| un |\pageref| komandas. Saturā punkts netiek likts, ja numurs
-% nebeidzas ar ciparu vai burtu (piem., ``\mbox{(a)\quad Kāda attēla
+% beidzas ne ar ciparu vai burtu (piem., ``\mbox{(a)\quad Kāda attēla
 % apakšattēls''}).
 %
 % Lai lietotu |\ref| un |\pageref| komandas virsrakstā vai nosaukumā,
@@ -127,8 +127,8 @@
 % \DescribeMacro{\nref}
 % \DescribeMacro{\npageref}
 % Dažreiz ir nepieciešams izmantot numuru bez tam sekojošā punkta, piem.,
-% ``apakšnodaļa~\nref{numbering}''. Šim gadījumam ir paredzētas |\nref| un
-% |\npageref| komandas, kuru lietošanas sintakse ir līdzīga |\ref| un
+% ``apakšnodaļa~\nref{sec:numbering}''. Šim gadījumam ir paredzētas |\nref|
+% un |\npageref| komandas, kuru lietošanas sintakse ir līdzīga |\ref| un
 % |\pageref| komandām:
 % \begin{quote}
 %   |\nref|\meta{$*$}\marg{iezīme}\\
@@ -138,9 +138,9 @@
 % \subsection{Daļu un nodaļu virsraksti}
 % \DescribeMacro{\part}
 % \DescribeMacro{\chapter}
-% Daļu un nodaļu virsrakstos numurs tagad ir pirms vārda, nevis pēc:
-% ``1.~nodaļa''. Izņēmums ir pielikuma virsraksts, kas saglabā veco kārtību:
-% ``Pielikums~A''. Daļas tiek numurētas ar arābu cipariem.
+% Daļu un nodaļu virsrakstos numurs tagad ir pirms vārda, nevis pēc (piem.,
+% ``1.~nodaļa''). Izņēmums ir pielikuma virsraksts, kas saglabā veco kārtību
+% (``Pielikums~A''). Daļas tiek numurētas ar arābu cipariem.
 %
 % \subsection{Nosaukumu tulkojumi}
 % \textsf{FixLatvian} pakotne satur vairāku nosaukumu un tekstu tulkojumus
@@ -418,7 +418,7 @@
 % \end{macro}
 %
 % \begin{macro}{\lstlistingname}
-% Izmaina pirmkoda tekstu nosaukumu.
+% Izmaina pirmkoda tekstu bloku nosaukumu.
 %    \begin{macrocode}
 \FixL@translate{listings}{lstlistingname}{Pirmkoda teksts}
 %    \end{macrocode}
