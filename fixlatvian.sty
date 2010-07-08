@@ -107,11 +107,11 @@
   }{%
     \FixL@fix@part{@part}%
   }}
+\newcommand{\FixL@inpackage}[2]{%
+  \AtBeginDocument{\@ifpackageloaded{#1}{#2}{}}}
 \newcommand{\FixL@translate}[3]{%
-  \AtBeginDocument{%
-    \@ifpackageloaded{#1}{%
-      \expandafter\renewcommand\csname#2\endcsname{#3}%
-    }{}%
+  \FixL@inpackage{#1}{%
+    \expandafter\renewcommand\csname#2\endcsname{#3}%
   }}
 \gappto\captionslatvian{%
   \renewcommand{\chaptername}{nodaļa}%
@@ -123,11 +123,11 @@
 \FixL@translate{algorithm}{ALG@name}{Algoritms}
 \FixL@translate{appendix}{appendixtocname}{Pielikumi}
 \newcommand{\FixL@doc@glossaryname}{Izmaiņu saraksts}
-\FixL@translate{doc}{glossary@prologue}{%
+\FixL@inpackage{doc}{\GlossaryPrologue{%
   \section*{\FixL@doc@glossaryname}%
   \markboth{\FixL@doc@glossaryname}{\FixL@doc@glossaryname}%
-}
-\FixL@translate{doc}{index@prologue}{%
+}}
+\FixL@inpackage{doc}{\IndexPrologue{%
   \section*{\indexname}%
   \markboth{\indexname}{\indexname}%
   Numuri kursīvā apzīmē lappusi, kurā aprakstīta attiecīgā komanda;
@@ -135,7 +135,7 @@
   pirmkoda rindu\else definīciju\fi; numuri parastajā rakstā apzīmē
   \ifcodeline@index pirmkoda rindu\else lappusi\fi, kurā komanda tiek
   izmantota.%
-}
+}}
 \FixL@translate{doc}{generalname}{Vispārīgs ieraksts}
 \FixL@translate{listings}{lstlistlistingname}{Pirmkoda tekstu saraksts}
 \FixL@translate{listings}{lstlistingname}{Pirmkoda teksts}

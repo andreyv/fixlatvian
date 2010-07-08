@@ -37,10 +37,7 @@
 \newcommand{\email}[1]{%
   \href{mailto:#1}{\nolinkurl{<#1>}}%
 }
-\makeatletter
-% ^^A FIXME Maybe this can be done better way
-\c@IndexColumns 2\relax
-\makeatother
+\setcounter{IndexColumns}{2}
 
 \EnableCrossrefs         
 \CodelineIndex
@@ -330,16 +327,18 @@
 % Pielāgo dažādus nosaukumus u.\,c., kas nav pārtulkoti latviešu valodā vai
 % neatbilst prasībām.
 %
+% \begin{macro}{\FixL@inpackage}
 % \begin{macro}{\FixL@translate}
-% Sākumā izveido palīgkomandu nosaukumu maiņai.
+% Sākumā izveido palīgkomandas nosaukumu maiņai.
 %    \begin{macrocode}
+\newcommand{\FixL@inpackage}[2]{%
+  \AtBeginDocument{\@ifpackageloaded{#1}{#2}{}}}
 \newcommand{\FixL@translate}[3]{%
-  \AtBeginDocument{%
-    \@ifpackageloaded{#1}{%
-      \expandafter\renewcommand\csname#2\endcsname{#3}%
-    }{}%
+  \FixL@inpackage{#1}{%
+    \expandafter\renewcommand\csname#2\endcsname{#3}%
   }}
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 %
 % \begin{macro}{\chaptername}
@@ -384,17 +383,17 @@
 % \end{macro}
 %
 % \subsubsection{Pakotnes \textsf{Doc} atbalsts}
-% \begin{macro}{\glossary@prologue}
-% \begin{macro}{\index@prologue}
+% \begin{macro}{\GlossaryPrologue}
+% \begin{macro}{\IndexPrologue}
 % \begin{macro}{\generalname}
 % Veic dažas izmaiņas, kas nepieciešamas šī paša dokumenta izveidei.
 %    \begin{macrocode}
 \newcommand{\FixL@doc@glossaryname}{Izmaiņu saraksts}
-\FixL@translate{doc}{glossary@prologue}{%
+\FixL@inpackage{doc}{\GlossaryPrologue{%
   \section*{\FixL@doc@glossaryname}%
   \markboth{\FixL@doc@glossaryname}{\FixL@doc@glossaryname}%
-}  
-\FixL@translate{doc}{index@prologue}{%
+}}
+\FixL@inpackage{doc}{\IndexPrologue{%
   \section*{\indexname}%
   \markboth{\indexname}{\indexname}%
   Numuri kursīvā apzīmē lappusi, kurā aprakstīta attiecīgā komanda;
@@ -402,7 +401,7 @@
   pirmkoda rindu\else definīciju\fi; numuri parastajā rakstā apzīmē
   \ifcodeline@index pirmkoda rindu\else lappusi\fi, kurā komanda tiek
   izmantota.%
-}
+}}
 \FixL@translate{doc}{generalname}{Vispārīgs ieraksts}
 %    \end{macrocode}
 % \end{macro}
