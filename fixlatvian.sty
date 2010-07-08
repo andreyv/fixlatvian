@@ -23,7 +23,7 @@
 \ProvidesPackage{fixlatvian}
   [2010/07/04 v0 Improved Latvian support]
 \RequirePackage{polyglossia}
-\setdefaultlanguage{latvian}
+\@ifundefined{latvian@loaded}{\setdefaultlanguage{latvian}}{}
 \RequirePackage{xstring}
 \RequirePackage{etoolbox}
 \RequirePackage{indentfirst}
