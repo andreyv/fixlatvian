@@ -113,7 +113,7 @@
 % \label{sec:numbering}
 % \DescribeMacro{\ref}
 % \DescribeMacro{\pageref}
-% Pēc automātiski izveidotajiem numuriem (nodaļas, sekcijas, attēli, utt.)
+% Pēc automātiski izveidotajiem numuriem (nodaļas, sekcijas, attēli, utt.)\
 % tiek likti punkti (piem., ``\ref{sec:numbering} apakšnodaļa''). Tie parādās
 % virsrakstu numerācijā, saturā un citos sarakstos, kā arī lietojot ierastās
 % |\ref| un |\pageref| komandas. Saturā punkts netiek likts, ja numurs
@@ -250,7 +250,7 @@
 %
 % \begin{macro}{\ref}
 % \begin{macro}{\pageref}
-% Izveido |\ref| un |\pageref| jaunās versijas --- ar punktiem. Neļauj \LaTeX{}
+% Izveido |\ref| un |\pageref| jaunās versijas~--- ar punktiem. Neļauj \LaTeX{}
 % sākt jaunu teikumu pēc punkta, tadējādi saglabājot normālu attālumu
 % starp vārdiem; neatļauj arī rindas beigas tieši pēc punkta.
 %
@@ -258,14 +258,15 @@
 %    \begin{macrocode}
 \newcommand{\FixL@ref@base}[4]{%
   \begingroup%
-    \newcommand{\FixL@temp@b}{\csname n#1\endcsname#2{#4}.}%
+    \newcommand{\FixL@temp@b}{%
+      \csname n#1\endcsname#2{#4}.\spacefactor\@m}%
     \IfStrEq{#3}{hyper}{%
       \hyperref[#4]{\FixL@temp@b}%
     }{%
       \FixL@temp@b%
     }%
   \endgroup%
-  \nobreakspace\ignorespaces%
+  \nobreak%
 }
 %    \end{macrocode}
 %

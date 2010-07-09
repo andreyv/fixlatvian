@@ -63,14 +63,15 @@
 }
 \newcommand{\FixL@ref@base}[4]{%
   \begingroup%
-    \newcommand{\FixL@temp@b}{\csname n#1\endcsname#2{#4}.}%
+    \newcommand{\FixL@temp@b}{%
+      \csname n#1\endcsname#2{#4}.\spacefactor\@m}%
     \IfStrEq{#3}{hyper}{%
       \hyperref[#4]{\FixL@temp@b}%
     }{%
       \FixL@temp@b%
     }%
   \endgroup%
-  \nobreakspace\ignorespaces%
+  \nobreak%
 }
 \AtBeginDocument{%
   \@ifpackageloaded{hyperref}{%
