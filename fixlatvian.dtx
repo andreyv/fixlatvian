@@ -77,11 +77,11 @@
 % \DoNotIndex{\@chapapp,\@ifpackageloaded,\@ifstar,\@ifundefined,\arabic,%
 %   \AtBeginDocument,\begingroup,\captionslatvian,\CheckCommand,\csname,%
 %   \else,\endcsname,\endgroup,\expandafter,\fi,\FixL@hyperref@beforetrue,%
-%   \FixL@temp@a,\FixL@temp@b,\gappto,\hskip,\hyperref,\ifcodeline@index,%
+%   \FixL@temp@a,\FixL@temp@b,\gappto,\hyperref,\ifcodeline@index,\space,%
 %   \IfStrEq,\IfSubStr,\ignorespaces,\let,\markboth,\newcommand,\newif,%
 %   \nobreakspace,\PackageWarning,\PackageWarningNoLine,\patchcmd,\quad,%
-%   \relax,\renewcommand,\RequirePackage,\section,\setdefaultlanguage,%
-%   \space,\StrRight,\thechapter,\thepart,\hspace}
+%   \renewcommand,\RequirePackage,\section,\setdefaultlanguage,\StrRight,%
+%   \thechapter,\thepart,\hspace,\PackageInfo}
 % 
 %
 % \title{\textsf{FixLatvian} pakotne\thanks{Versija~\fileversion{}
@@ -170,13 +170,16 @@
 %
 % \begin{macro}{\FixL@warning}
 % \begin{macro}{\FixL@warning@noline}
-% Definē brīdinājumu izvada komandas.
+% \begin{macro}{\FixL@info}
+% Definē brīdinājumu un paziņojumu izvada komandas.
 %    \begin{macrocode}
 \newcommand{\FixL@warning}[1]{%
   \PackageWarning{fixlatvian}{#1}}
 \newcommand{\FixL@warning@noline}[1]{%
   \PackageWarningNoLine{fixlatvian}{#1}}
+\newcommand{\FixL@info}[1]{\PackageInfo{fixlatvian}{#1}}
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 % \end{macro}
 %
@@ -285,6 +288,14 @@
 % \end{macro}
 %
 % \subsection{Daļu un nodaļu virsraksti}
+% \begin{macro}{\FixL@patchfailed}
+% Definē palīgkomandu paziņojumu izvadam.
+%    \begin{macrocode}
+\newcommand{\FixL@patchfailed}[1]{%
+  \FixL@info{Could not change the definition of the \protect#1 command}}
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{\@makechapterhead}
 % Izmaina nodaļu virsrakstu vārdu secību no ``Nodaļa~1'' uz ``1.~nodaļa'' (bet
 % atstāj ``Pielikums~A''). Ja ``|\@chapapp\space \thechapter|'' virkne nav
@@ -300,7 +311,9 @@
     }{%
       \thechapter.\nobreakspace\@chapapp%
     }%
-  }{}{}}
+  }{}{%
+    \FixL@patchfailed{\chapter}%
+  }}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -315,7 +328,10 @@
       \partname\nobreakspace\thepart%
     }{%
       \thepart.\nobreakspace\partname%
-    }{}{}}}
+    }{}{%
+      \FixL@patchfailed{\part}%
+    }%
+  }}
 \AtBeginDocument{%
   \@ifpackageloaded{hyperref}{%
     \FixL@fix@part{H@old@part}%

@@ -31,6 +31,7 @@
   \PackageWarning{fixlatvian}{#1}}
 \newcommand{\FixL@warning@noline}[1]{%
   \PackageWarningNoLine{fixlatvian}{#1}}
+\newcommand{\FixL@info}[1]{\PackageInfo{fixlatvian}{#1}}
 \newif\ifFixL@hyperref@before
 \@ifpackageloaded{hyperref}{\FixL@hyperref@beforetrue}{}
 \AtBeginDocument{%
@@ -83,6 +84,8 @@
     \renewcommand{\ref}[1]{\FixL@ref@base{ref}{}{}{#1}}%
     \renewcommand{\pageref}[1]{\FixL@ref@base{pageref}{}{}{#1}}%
   }}
+\newcommand{\FixL@patchfailed}[1]{%
+  \FixL@info{Could not change the definition of the \protect#1 command}}
 \@ifundefined{@makechapterhead}{}{%
   \patchcmd{\@makechapterhead}{%
     \@chapapp\space \thechapter%
@@ -92,7 +95,9 @@
     }{%
       \thechapter.\nobreakspace\@chapapp%
     }%
-  }{}{}}
+  }{}{%
+    \FixL@patchfailed{\chapter}%
+  }}
 \newcommand{\FixL@fix@part}[1]{%
   \@ifundefined{#1}{}{%
     \renewcommand{\thepart}{\arabic{part}}%
@@ -100,7 +105,10 @@
       \partname\nobreakspace\thepart%
     }{%
       \thepart.\nobreakspace\partname%
-    }{}{}}}
+    }{}{%
+      \FixL@patchfailed{\part}%
+    }%
+  }}
 \AtBeginDocument{%
   \@ifpackageloaded{hyperref}{%
     \FixL@fix@part{H@old@part}%
