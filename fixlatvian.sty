@@ -27,6 +27,7 @@
 \RequirePackage{xstring}
 \RequirePackage{etoolbox}
 \RequirePackage{indentfirst}
+\ProcessOptions\relax
 \newcommand{\FixL@warning}[1]{%
   \PackageWarning{fixlatvian}{#1}}
 \newcommand{\FixL@warning@noline}[1]{%
@@ -64,7 +65,7 @@
 \newcommand{\FixL@ref@base}[4]{%
   \begingroup%
     \newcommand{\FixL@temp@b}{%
-      \csname n#1\endcsname#2{#4}.\spacefactor\@m}%
+      \csname n#1\endcsname#2{#4}.\spacefactor\@m\relax}%
     \IfStrEq{#3}{hyper}{%
       \hyperref[#4]{\FixL@temp@b}%
     }{%
