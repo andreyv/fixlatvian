@@ -82,7 +82,7 @@
 %   \nobreakspace,\PackageWarning,\PackageWarningNoLine,\patchcmd,\quad,%
 %   \renewcommand,\RequirePackage,\section,\setdefaultlanguage,\StrRight,%
 %   \thechapter,\thepart,\hspace,\PackageInfo,\protect,\chapter,\part,%
-%   \spacefactor,\@m,\nobreak,\relax,\ProcessOptions}
+%   \@,\nobreak,\relax,\ProcessOptions}
 % 
 %
 % \title{\textsf{FixLatvian} pakotne\thanks{Versija~\fileversion{}
@@ -264,13 +264,8 @@
 %    \begin{macrocode}
 \newcommand{\FixL@ref@base}[4]{%
   \begingroup%
-    \newcommand{\FixL@temp@b}{%
-      \csname n#1\endcsname#2{#4}.\spacefactor\@m\relax}%
-    \IfStrEq{#3}{hyper}{%
-      \hyperref[#4]{\FixL@temp@b}%
-    }{%
-      \FixL@temp@b%
-    }%
+    \newcommand{\FixL@temp@b}{\csname n#1\endcsname#2{#4}.\@}%
+    \IfStrEq{#3}{hyper}{\hyperref[#4]{\FixL@temp@b}}{\FixL@temp@b}%
   \endgroup%
   \nobreak%
 }
