@@ -85,7 +85,7 @@
 %   \renewcommand,\RequirePackage,\section,\setdefaultlanguage,\StrRight,%
 %   \thechapter,\thepart,\hspace,\PackageInfo,\protect,\chapter,\part,%
 %   \@,\nobreak,\relax,\ProcessOptions,\floatname,\robustify,\DeclareOption,%
-%   \frenchspacing,\nonfrenchspacing,\ExecuteOptions}
+%   \frenchspacing,\nonfrenchspacing,\ExecuteOptions,\ifcase,\or,\@ctrerr}
 % 
 %
 % \title{\textsf{FixLatvian} pakotne\thanks{Versija~\fileversion{}
@@ -152,6 +152,12 @@
 %   \textsf{Doc},
 %   \textsf{Listings}
 % komandas.
+%
+% \DescribeMacro{\alph}
+% \DescribeMacro{\Alph}
+% |\alph| un |\Alph| komandas, kas pārvērš \LaTeX{} skaitītāju vērtības burtos,
+% tagad izvada tikai latviešu alfabētā esošos, izņemot burtus ar diakritiskajām
+% zīmēm.
 %
 % \subsection{Tipografiskās īpatnības}
 % \subsubsection{Atstarpes starp vārdiem}
@@ -395,6 +401,22 @@
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \subsubsection{Numerācija ar latviešu burtiem}
+% \begin{macro}{\@alph}
+% \begin{macro}{\@Alph}
+% Izmaina |\@alph| un |\@Alph| komandu definīcijas, lai tās saturētu tikai
+% latviešu alfabēta burtus bez diakritiskajām zīmēm.
+%    \begin{macrocode}
+\renewcommand{\@alph}[1]{%
+  \ifcase #1\or a\or b\or c\or d\or e\or f\or g\or h\or i\or j\or k\or l%
+  \or m\or n\or o\or p\or r\or s\or t\or u\or v\or z\else\@ctrerr\fi}
+\renewcommand{\@Alph}[1]{%
+  \ifcase #1\or A\or B\or C\or D\or E\or F\or G\or H\or I\or J\or K\or L%
+  \or M\or N\or O\or P\or R\or S\or T\or U\or V\or Z\else\@ctrerr\fi}
+%    \end{macrocode}
 % \end{macro}
 % \end{macro}
 %
