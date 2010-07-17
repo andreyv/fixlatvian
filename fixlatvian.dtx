@@ -123,9 +123,6 @@
 % beidzas ne ar ciparu vai burtu (piem., <<\mbox{(a)\quad Kāda attēla
 % apakšattēls>>}).
 %
-% Lai lietotu |\ref| un |\pageref| komandas virsrakstā vai nosaukumā,
-% pirms tām jāraksta |\protect|.
-%
 % \DescribeMacro{\nref}
 % \DescribeMacro{\npageref}
 % Dažreiz ir nepieciešams izmantot numuru bez tam sekojošā punkta, piem.,
@@ -274,7 +271,10 @@
 }
 %    \end{macrocode}
 %
-% Pēc tam definē pašas komandas, izmantojot iepriekš izveidoto.
+% Pēc tam definē pašas komandas, izmantojot iepriekš izveidoto. Padara
+% iespējamu šo komandu izmantošanu <<kustīgajos parametros>>.\footnote{
+% \texttt{\string\DeclareRobustCommand} kaut kā nedarbojas ar
+% \textsf{Hyperref} versijām\ldots}
 %    \begin{macrocode}
 \AtBeginDocument{%
   \@ifpackageloaded{hyperref}{%
@@ -287,7 +287,10 @@
   }{%
     \renewcommand{\ref}[1]{\FixL@ref@base{ref}{}{}{#1}}%
     \renewcommand{\pageref}[1]{\FixL@ref@base{pageref}{}{}{#1}}%
-  }}
+  }%
+  \robustify{\ref}%
+  \robustify{\pageref}%
+}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}

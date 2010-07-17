@@ -80,7 +80,10 @@
   }{%
     \renewcommand{\ref}[1]{\FixL@ref@base{ref}{}{}{#1}}%
     \renewcommand{\pageref}[1]{\FixL@ref@base{pageref}{}{}{#1}}%
-  }}
+  }%
+  \robustify{\ref}%
+  \robustify{\pageref}%
+}
 \newcommand{\FixL@patchfailed}[1]{%
   \FixL@info{Could not change the definition of the \protect#1 command}}
 \@ifundefined{@makechapterhead}{}{%
