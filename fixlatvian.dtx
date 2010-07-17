@@ -146,7 +146,7 @@
 % \textsf{FixLatvian} pakotne satur vairāku nosaukumu un tekstu tulkojumus
 % papildus tam, ko jau piedāvā \textsf{Polyglossia} pakotne. Tulkojamo
 % tekstu saraksts satur gan dažas \LaTeX{} komandas, gan pakotņu
-%   \textsf{Algorithm},
+%   \textsf{Algorithms},
 %   \textsf{Appendix},
 %   \textsf{Doc},
 %   \textsf{Listings}
@@ -379,7 +379,7 @@
 % \end{macro}
 % \end{macro}
 %
-% \subsubsection{Pakotnes \textsf{Algorithm} atbalsts}
+% \subsubsection{Pakotnes \textsf{Algorithms} atbalsts}
 % \begin{macro}{\listalgorithmname}
 % Izmaina algoritmu saraksta nosaukumu.
 %    \begin{macrocode}
@@ -387,12 +387,10 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\ALG@name}
 % Izmaina algoritmu tekstu nosaukumu.
 %    \begin{macrocode}
-\FixL@translate{algorithm}{ALG@name}{Algoritms}
+\FixL@inpackage{algorithm}{\floatname{algorithm}{Algoritms}}
 %    \end{macrocode}
-% \end{macro}
 %
 % \subsubsection{Pakotnes \textsf{Appendix} atbalsts}
 % \begin{macro}{\appendixtocname}
