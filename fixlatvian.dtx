@@ -31,13 +31,15 @@
 
 \usepackage{fixltx2e}
 \usepackage{metalogo}
-\usepackage{hyperref}
+\usepackage[toc]{multitoc}
+\usepackage[bookmarksdepth=3]{hyperref}
 \usepackage{fixlatvian}
 
 \newcommand{\email}[1]{%
   \href{mailto:#1}{\nolinkurl{<#1>}}%
 }
 \setcounter{IndexColumns}{2}
+\setcounter{tocdepth}{2}
 
 \EnableCrossrefs         
 \CodelineIndex
