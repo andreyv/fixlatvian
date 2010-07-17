@@ -84,7 +84,8 @@
 %   \nobreakspace,\PackageWarning,\PackageWarningNoLine,\patchcmd,\quad,%
 %   \renewcommand,\RequirePackage,\section,\setdefaultlanguage,\StrRight,%
 %   \thechapter,\thepart,\hspace,\PackageInfo,\protect,\chapter,\part,%
-%   \@,\nobreak,\relax,\ProcessOptions}
+%   \@,\nobreak,\relax,\ProcessOptions,\floatname,\robustify,\DeclareOption,%
+%   \frenchspacing,\nonfrenchspacing,\ExecuteOptions}
 % 
 %
 % \title{\textsf{FixLatvian} pakotne\thanks{Versija~\fileversion{}
@@ -152,6 +153,15 @@
 %   \textsf{Listings}
 % komandas.
 %
+% \subsection{Tipografiskās īpatnības}
+% \subsubsection{Atstarpes starp vārdiem}
+% Pēc noklusējuma tiek uzstādīts vienāds atstarpju garums pēc visiem
+% simboliem. Lai pēc punktuācijas zīmēm tiktu liktas lielākas atstarpes, kā
+% pieņemts angļu valodā, pakotnei jāpadod parametrs |nonfrenchspacing|:
+% \begin{quote}
+%   |\usepackage[nonfrenchspacing]{fixlatvian}|
+% \end{quote}
+%
 % \StopEventually{}
 %
 % \section{Realizācija}
@@ -169,8 +179,11 @@
 \RequirePackage{indentfirst}
 %    \end{macrocode}
 %
-% Apstrādā pakotnes parametrus.
+% Definē un apstrādā pakotnes parametrus.
 %    \begin{macrocode}
+\DeclareOption{frenchspacing}{\frenchspacing}
+\DeclareOption{nonfrenchspacing}{\nonfrenchspacing}
+\ExecuteOptions{frenchspacing}
 \ProcessOptions\relax
 %    \end{macrocode}
 %

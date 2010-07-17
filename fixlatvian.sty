@@ -27,6 +27,9 @@
 \RequirePackage{xstring}
 \RequirePackage{etoolbox}
 \RequirePackage{indentfirst}
+\DeclareOption{frenchspacing}{\frenchspacing}
+\DeclareOption{nonfrenchspacing}{\nonfrenchspacing}
+\ExecuteOptions{frenchspacing}
 \ProcessOptions\relax
 \newcommand{\FixL@warning}[1]{%
   \PackageWarning{fixlatvian}{#1}}
