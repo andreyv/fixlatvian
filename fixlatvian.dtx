@@ -85,7 +85,8 @@
 %   \renewcommand,\RequirePackage,\section,\setdefaultlanguage,\StrRight,%
 %   \thechapter,\thepart,\hspace,\PackageInfo,\protect,\chapter,\part,%
 %   \@,\nobreak,\relax,\ProcessOptions,\floatname,\robustify,\DeclareOption,%
-%   \frenchspacing,\nonfrenchspacing,\ExecuteOptions,\ifcase,\or,\@ctrerr}
+%   \frenchspacing,\nonfrenchspacing,\ExecuteOptions,\ifcase,\or,\@ctrerr,%
+%   \MakePerPage}
 % 
 %
 % \title{\textsf{FixLatvian} pakotne\thanks{Versija~\fileversion{}
@@ -168,6 +169,10 @@
 %   |\usepackage[nonfrenchspacing]{fixlatvian}|
 % \end{quote}
 %
+% \subsubsection{Zemteksta piezīmes}
+% \DescribeMacro{\footnote}
+% Zemteksta piezīmju numerācija tagad sākas no jauna katru lappusi.
+%
 % \StopEventually{}
 %
 % \section{Realizācija}
@@ -178,6 +183,7 @@
 \@ifundefined{latvian@loaded}{\setdefaultlanguage{latvian}}{}
 \RequirePackage{xstring}
 \RequirePackage{etoolbox}
+\RequirePackage{perpage}
 %    \end{macrocode}
 %
 % Pieņem, ka pirmajām rindkopām ir atkāpes.
@@ -484,6 +490,12 @@
 \FixL@translate{listings}{lstlistingname}{Pirmkoda teksts}
 %    \end{macrocode}
 % \end{macro}
+%
+% \subsection{Zemteksta piezīmes}
+% Sāk zemteksta piezīmju numerāciju no jauna katru lappusi.
+%    \begin{macrocode}
+\MakePerPage{footnote}
+%    \end{macrocode}
 %
 % \Finale
 \endinput

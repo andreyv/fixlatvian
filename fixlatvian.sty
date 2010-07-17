@@ -26,6 +26,7 @@
 \@ifundefined{latvian@loaded}{\setdefaultlanguage{latvian}}{}
 \RequirePackage{xstring}
 \RequirePackage{etoolbox}
+\RequirePackage{perpage}
 \RequirePackage{indentfirst}
 \DeclareOption{frenchspacing}{\frenchspacing}
 \DeclareOption{nonfrenchspacing}{\nonfrenchspacing}
@@ -156,6 +157,7 @@
 \FixL@translate{doc}{generalname}{Vispārīgs ieraksts}
 \FixL@translate{listings}{lstlistlistingname}{Pirmkoda tekstu saraksts}
 \FixL@translate{listings}{lstlistingname}{Pirmkoda teksts}
+\MakePerPage{footnote}
 \endinput
 %%
 %% End of file `fixlatvian.sty'.
