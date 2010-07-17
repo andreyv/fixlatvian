@@ -86,7 +86,7 @@
 %   \thechapter,\thepart,\hspace,\PackageInfo,\protect,\chapter,\part,%
 %   \@,\nobreak,\relax,\ProcessOptions,\floatname,\robustify,\DeclareOption,%
 %   \frenchspacing,\nonfrenchspacing,\ExecuteOptions,\ifcase,\or,\@ctrerr,%
-%   \MakePerPage}
+%   \MakePerPage,\caption,\figurename,\,,\thefigure}
 % 
 %
 % \title{\textsf{FixLatvian} pakotne\thanks{Versija~\fileversion{}
@@ -163,8 +163,8 @@
 % \subsection{Tipografiskās īpatnības}
 % \subsubsection{Atstarpes starp vārdiem}
 % Pēc noklusējuma tiek uzstādīts vienāds atstarpju garums pēc visiem
-% simboliem. Lai pēc punktuācijas zīmēm tiktu liktas lielākas atstarpes, kā
-% pieņemts angļu valodā, pakotnei jāpadod parametrs |nonfrenchspacing|:
+% simboliem. Lai pēc pieturzīmēm tiktu liktas lielākas atstarpes, kā pieņemts
+% angļu valodā, pakotnei jāpadod parametrs |nonfrenchspacing|:
 % \begin{quote}
 %   |\usepackage[nonfrenchspacing]{fixlatvian}|
 % \end{quote}
@@ -172,6 +172,11 @@
 % \subsubsection{Zemteksta piezīmes}
 % \DescribeMacro{\footnote}
 % Zemteksta piezīmju numerācija tagad sākas no jauna katru lappusi.
+%
+% \subsubsection{Attēlu un tabulu virsraksti}
+% \DescribeMacro{\caption}
+% Numuru un nosaukumu attēla vai tabulas virsrakstā tagad atdala punkts, nevis
+% kols.
 %
 % \StopEventually{}
 %
@@ -230,6 +235,7 @@
 %    \end{macrocode}
 %
 % \begin{macro}{\FixL@alnum}
+% \begin{macro}{\FixL@patchfailed}
 % Definē arī palīgkomandas.
 %    \begin{macrocode}
 \newcommand{\FixL@alnum}{%
@@ -237,7 +243,10 @@
   abcdefghijklmnopqrstuvwxyz%
   0123456789%
 }
+\newcommand{\FixL@patchfailed}[1]{%
+  \FixL@info{Could not change the definition of the \protect #1 command}}
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 %
 % \subsection{Numerācija ar punktiem}
@@ -321,14 +330,6 @@
 % \end{macro}
 %
 % \subsection{Daļu un nodaļu virsraksti}
-% \begin{macro}{\FixL@patchfailed}
-% Definē palīgkomandu paziņojumu izvadam.
-%    \begin{macrocode}
-\newcommand{\FixL@patchfailed}[1]{%
-  \FixL@info{Could not change the definition of the \protect#1 command}}
-%    \end{macrocode}
-% \end{macro}
-%
 % \begin{macro}{\@makechapterhead}
 % Izmaina nodaļu virsrakstu vārdu secību no <<Nodaļa~1>> uz <<1.~nodaļa>> (bet
 % atstāj <<Pielikums~A>>). Ja <<|\@chapapp\space \thechapter|>> virkne nav
@@ -496,6 +497,23 @@
 %    \begin{macrocode}
 \MakePerPage{footnote}
 %    \end{macrocode}
+%
+% \subsection{Attēlu un tabulu virsraksti}
+% \begin{macro}{\@makecaption}
+% Pārdefinē standarta |\@makecaption| komandu, lai aizvietotu kolu ar punktu.
+%    \begin{macrocode}
+\patchcmd{\@makecaption}{#1: #2}{#1.\nobreakspace #2}{}{%
+  \FixL@patchfailed{\caption}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\fnum@figure}
+% Izmaina arī attēlu virsraksta pirmo daļu, lai pirms attēla numura nebūtu tik
+% liela atstarpe.
+%    \begin{macrocode}
+\renewcommand{\fnum@figure}{\figurename\,\thefigure}
+%    \end{macrocode}
+% \end{macro}
 %
 % \Finale
 \endinput

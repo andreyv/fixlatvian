@@ -53,6 +53,8 @@
   abcdefghijklmnopqrstuvwxyz%
   0123456789%
 }
+\newcommand{\FixL@patchfailed}[1]{%
+  \FixL@info{Could not change the definition of the \protect #1 command}}
 \CheckCommand*{\@seccntformat}[1]{\csname the#1\endcsname\quad}
 \renewcommand{\@seccntformat}[1]{%
   \csname the#1\endcsname.\hspace{.66667em}}
@@ -88,8 +90,6 @@
   \robustify{\ref}%
   \robustify{\pageref}%
 }
-\newcommand{\FixL@patchfailed}[1]{%
-  \FixL@info{Could not change the definition of the \protect#1 command}}
 \@ifundefined{@makechapterhead}{}{%
   \patchcmd{\@makechapterhead}{%
     \@chapapp\space \thechapter%
@@ -158,6 +158,9 @@
 \FixL@translate{listings}{lstlistlistingname}{Pirmkoda tekstu saraksts}
 \FixL@translate{listings}{lstlistingname}{Pirmkoda teksts}
 \MakePerPage{footnote}
+\patchcmd{\@makecaption}{#1: #2}{#1.\nobreakspace #2}{}{%
+  \FixL@patchfailed{\caption}}
+\renewcommand{\fnum@figure}{\figurename\,\thefigure}
 \endinput
 %%
 %% End of file `fixlatvian.sty'.
