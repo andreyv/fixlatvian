@@ -119,12 +119,6 @@
   }{%
     \FixL@fix@part{@part}%
   }}
-\newcommand{\FixL@inpackage}[2]{%
-  \AtBeginDocument{\@ifpackageloaded{#1}{#2}{}}}
-\newcommand{\FixL@translate}[3]{%
-  \FixL@inpackage{#1}{%
-    \expandafter\renewcommand\csname#2\endcsname{#3}%
-  }}
 \gappto\captionslatvian{%
   \renewcommand{\chaptername}{nodaļa}%
   \renewcommand{\indexname}{Rādītājs}%
@@ -137,6 +131,16 @@
 \renewcommand{\@Alph}[1]{%
   \ifcase #1\or A\or B\or C\or D\or E\or F\or G\or H\or I\or J\or K\or L%
   \or M\or N\or O\or P\or R\or S\or T\or U\or V\or Z\else\@ctrerr\fi}
+\MakePerPage{footnote}
+\patchcmd{\@makecaption}{#1: #2}{#1.\nobreakspace #2}{}{%
+  \FixL@patchfailed{\caption}}
+\renewcommand{\fnum@figure}{\figurename\,\thefigure}
+\newcommand{\FixL@inpackage}[2]{%
+  \AtBeginDocument{\@ifpackageloaded{#1}{#2}{}}}
+\newcommand{\FixL@translate}[3]{%
+  \FixL@inpackage{#1}{%
+    \expandafter\renewcommand\csname#2\endcsname{#3}%
+  }}
 \FixL@translate{algorithm}{listalgorithmname}{Algoritmu saraksts}
 \FixL@inpackage{algorithm}{\floatname{algorithm}{Algoritms}}
 \FixL@translate{appendix}{appendixtocname}{Pielikumi}
@@ -157,10 +161,6 @@
 \FixL@translate{doc}{generalname}{Vispārīgs ieraksts}
 \FixL@translate{listings}{lstlistlistingname}{Pirmkoda tekstu saraksts}
 \FixL@translate{listings}{lstlistingname}{Pirmkoda teksts}
-\MakePerPage{footnote}
-\patchcmd{\@makecaption}{#1: #2}{#1.\nobreakspace #2}{}{%
-  \FixL@patchfailed{\caption}}
-\renewcommand{\fnum@figure}{\figurename\,\thefigure}
 \endinput
 %%
 %% End of file `fixlatvian.sty'.

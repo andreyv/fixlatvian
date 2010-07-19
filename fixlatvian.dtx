@@ -375,29 +375,12 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \subsection{Nosaukumu un citu tekstu tulkojumi}
-% Pielāgo dažādus nosaukumus u.\,c., kas nav pārtulkoti latviešu valodā vai
-% neatbilst prasībām.
-%
-% \begin{macro}{\FixL@inpackage}
-% \begin{macro}{\FixL@translate}
-% Sākumā izveido palīgkomandas nosaukumu maiņai.
-%    \begin{macrocode}
-\newcommand{\FixL@inpackage}[2]{%
-  \AtBeginDocument{\@ifpackageloaded{#1}{#2}{}}}
-\newcommand{\FixL@translate}[3]{%
-  \FixL@inpackage{#1}{%
-    \expandafter\renewcommand\csname#2\endcsname{#3}%
-  }}
-%    \end{macrocode}
-% \end{macro}
-% \end{macro}
-%
+% \subsection{Nosaukumu tulkojumi}
 % \begin{macro}{\chaptername}
 % \begin{macro}{\indexname}
 % \begin{macro}{\partname}
 % \begin{macro}{\alsoname}
-% Tad pārdefinē dažas vispārīgas komandas.
+% Pielāgo dažus \LaTeX{} nosaukumus.
 %    \begin{macrocode}
 \gappto\captionslatvian{%
   \renewcommand{\chaptername}{nodaļa}%
@@ -423,6 +406,44 @@
 \renewcommand{\@Alph}[1]{%
   \ifcase #1\or A\or B\or C\or D\or E\or F\or G\or H\or I\or J\or K\or L%
   \or M\or N\or O\or P\or R\or S\or T\or U\or V\or Z\else\@ctrerr\fi}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \subsection{Zemteksta piezīmes}
+% Sāk zemteksta piezīmju numerāciju no jauna katru lappusi.
+%    \begin{macrocode}
+\MakePerPage{footnote}
+%    \end{macrocode}
+%
+% \subsection{Attēlu un tabulu virsraksti}
+% \begin{macro}{\@makecaption}
+% Pārdefinē standarta |\@makecaption| komandu, lai aizvietotu kolu ar punktu.
+%    \begin{macrocode}
+\patchcmd{\@makecaption}{#1: #2}{#1.\nobreakspace #2}{}{%
+  \FixL@patchfailed{\caption}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\fnum@figure}
+% Izmaina arī attēlu virsraksta pirmo daļu, lai pirms attēla numura nebūtu tik
+% liela atstarpe.
+%    \begin{macrocode}
+\renewcommand{\fnum@figure}{\figurename\,\thefigure}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Citu pakotņu atbalsts}
+% \begin{macro}{\FixL@inpackage}
+% \begin{macro}{\FixL@translate}
+% Sākumā izveido palīgkomandas nosaukumu utt.\ maiņai citās pakotnēs.
+%    \begin{macrocode}
+\newcommand{\FixL@inpackage}[2]{%
+  \AtBeginDocument{\@ifpackageloaded{#1}{#2}{}}}
+\newcommand{\FixL@translate}[3]{%
+  \FixL@inpackage{#1}{%
+    \expandafter\renewcommand\csname#2\endcsname{#3}%
+  }}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -489,29 +510,6 @@
 % Izmaina pirmkoda tekstu bloku nosaukumu.
 %    \begin{macrocode}
 \FixL@translate{listings}{lstlistingname}{Pirmkoda teksts}
-%    \end{macrocode}
-% \end{macro}
-%
-% \subsection{Zemteksta piezīmes}
-% Sāk zemteksta piezīmju numerāciju no jauna katru lappusi.
-%    \begin{macrocode}
-\MakePerPage{footnote}
-%    \end{macrocode}
-%
-% \subsection{Attēlu un tabulu virsraksti}
-% \begin{macro}{\@makecaption}
-% Pārdefinē standarta |\@makecaption| komandu, lai aizvietotu kolu ar punktu.
-%    \begin{macrocode}
-\patchcmd{\@makecaption}{#1: #2}{#1.\nobreakspace #2}{}{%
-  \FixL@patchfailed{\caption}}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\fnum@figure}
-% Izmaina arī attēlu virsraksta pirmo daļu, lai pirms attēla numura nebūtu tik
-% liela atstarpe.
-%    \begin{macrocode}
-\renewcommand{\fnum@figure}{\figurename\,\thefigure}
 %    \end{macrocode}
 % \end{macro}
 %
