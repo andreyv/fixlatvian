@@ -86,7 +86,8 @@
 %   \thechapter,\thepart,\hspace,\PackageInfo,\protect,\chapter,\part,%
 %   \@,\nobreak,\relax,\ProcessOptions,\floatname,\robustify,\DeclareOption,%
 %   \frenchspacing,\nonfrenchspacing,\ExecuteOptions,\ifcase,\or,\@ctrerr,%
-%   \MakePerPage,\caption,\figurename,\,,\thefigure}
+%   \MakePerPage,\caption,\thetable,\,,\thefigure,\@empty,\lst@@caption,%
+%   \ifx}
 % 
 %
 % \title{\textsf{FixLatvian} pakotne\thanks{Versija~\fileversion{}
@@ -175,8 +176,7 @@
 %
 % \subsubsection{Attēlu un tabulu virsraksti}
 % \DescribeMacro{\caption}
-% Numuru un nosaukumu attēla vai tabulas virsrakstā tagad atdala punkts, nevis
-% kols.
+% Attēlu un tabulu virsraksti tagad ir formā <<1.\,att.~Nosaukums>>.
 %
 % \StopEventually{}
 %
@@ -376,19 +376,25 @@
 % \end{macro}
 %
 % \subsection{Nosaukumu tulkojumi}
+% \begin{macro}{\alsoname}
 % \begin{macro}{\chaptername}
+% \begin{macro}{\figurename}
 % \begin{macro}{\indexname}
 % \begin{macro}{\partname}
-% \begin{macro}{\alsoname}
+% \begin{macro}{\tablename}
 % Pielāgo dažus \LaTeX{} nosaukumus.
 %    \begin{macrocode}
 \gappto\captionslatvian{%
+  \renewcommand{\alsoname}{sk.~arī}%
   \renewcommand{\chaptername}{nodaļa}%
+  \renewcommand{\figurename}{att}%
   \renewcommand{\indexname}{Rādītājs}%
   \renewcommand{\partname}{daļa}%
-  \renewcommand{\alsoname}{sk.~arī}%
+  \renewcommand{\tablename}{tabula}%
 }
 %    \end{macrocode}
+% \end{macro}
+% \end{macro}
 % \end{macro}
 % \end{macro}
 % \end{macro}
@@ -426,11 +432,13 @@
 % \end{macro}
 %
 % \begin{macro}{\fnum@figure}
-% Izmaina arī attēlu virsraksta pirmo daļu, lai pirms attēla numura nebūtu tik
-% liela atstarpe.
+% \begin{macro}{\fnum@table}
+% Izmaina attēlu un tabulu virsrakstu struktūru.
 %    \begin{macrocode}
-\renewcommand{\fnum@figure}{\figurename\,\thefigure}
+\renewcommand{\fnum@figure}{\thefigure.\,\figurename}
+\renewcommand{\fnum@table}{\thetable.\,\tablename}
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 %
 % \subsection{Citu pakotņu atbalsts}
@@ -509,7 +517,16 @@
 % \begin{macro}{\lstlistingname}
 % Izmaina pirmkoda tekstu bloku nosaukumu.
 %    \begin{macrocode}
-\FixL@translate{listings}{lstlistingname}{Pirmkoda teksts}
+\FixL@translate{listings}{lstlistingname}{%
+  \ifx\lst@@caption P\else p\fi irmkoda teksts}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\fnum@lstlisting}
+% Izmaina tekstu bloka virsraksta strutkūru.
+%    \begin{macrocode}
+\FixL@translate{listings}{fnum@lstlisting}{%
+  \ifx\lst@@caption\@empty\else\thelstlisting.\,\fi\lstlistingname}
 %    \end{macrocode}
 % \end{macro}
 %
