@@ -32,8 +32,7 @@
 \DeclareOption{nonfrenchspacing}{\nonfrenchspacing}
 \ExecuteOptions{frenchspacing}
 \ProcessOptions\relax
-\newcommand{\FixL@warning}[1]{%
-  \PackageWarning{fixlatvian}{#1}}
+\newcommand{\FixL@warning}[1]{\PackageWarning{fixlatvian}{#1}}
 \newcommand{\FixL@warning@noline}[1]{%
   \PackageWarningNoLine{fixlatvian}{#1}}
 \newcommand{\FixL@info}[1]{\PackageInfo{fixlatvian}{#1}}
@@ -41,12 +40,12 @@
 \@ifpackageloaded{hyperref}{\FixL@hyperref@beforetrue}{}
 \AtBeginDocument{%
   \@ifpackageloaded{hyperref}{%
-    \ifFixL@hyperref@before%
-    \else%
+    \ifFixL@hyperref@before
+    \else
       \FixL@warning@noline{%
         This package should be loaded after \space hyperref%
       }%
-    \fi%
+    \fi
   }{}}
 \newcommand{\FixL@alnum}{%
   ABCDEFGHIJKLMNOPQRSTUVWXYZ%
@@ -58,22 +57,22 @@
 \CheckCommand*{\@seccntformat}[1]{\csname the#1\endcsname\quad}
 \renewcommand{\@seccntformat}[1]{%
   \csname the#1\endcsname.\hspace{.66667em}}
-\let\FixL@save@numberline\numberline
+\let\FixL@old@numberline\numberline
 \renewcommand{\numberline}[1]{%
   \StrRight{#1}{1}[\FixL@temp@a]%
-  \FixL@save@numberline{#1%
+  \FixL@old@numberline{#1%
     \IfSubStr{\FixL@alnum}{\FixL@temp@a}{.}{}%
   }}
 \AtBeginDocument{%
-  \let\nref\ref%
-  \let\npageref\pageref%
+  \let\nref\ref
+  \let\npageref\pageref
 }
 \newcommand{\FixL@ref@base}[4]{%
-  \begingroup%
+  \begingroup
     \newcommand{\FixL@temp@b}{\csname n#1\endcsname#2{#4}.\@}%
     \IfStrEq{#3}{hyper}{\hyperref[#4]{\FixL@temp@b}}{\FixL@temp@b}%
-  \endgroup%
-  \nobreak%
+  \endgroup
+  \nobreak
 }
 \AtBeginDocument{%
   \@ifpackageloaded{hyperref}{%
@@ -92,12 +91,12 @@
 }
 \@ifundefined{@makechapterhead}{}{%
   \patchcmd{\@makechapterhead}{%
-    \@chapapp\space \thechapter%
+    \@chapapp\space \thechapter
   }{%
     \IfStrEq{\@chapapp}{\appendixname}{%
-      \@chapapp\space\thechapter%
+      \@chapapp\space\thechapter
     }{%
-      \thechapter.\nobreakspace\@chapapp%
+      \thechapter.\nobreakspace\@chapapp
     }%
   }{}{%
     \FixL@patchfailed{\chapter}%
@@ -105,10 +104,10 @@
 \newcommand{\FixL@fix@part}[1]{%
   \@ifundefined{#1}{}{%
     \renewcommand{\thepart}{\arabic{part}}%
-    \expandafter\patchcmd\csname#1\endcsname{%
-      \partname\nobreakspace\thepart%
+    \expandafter\patchcmd\csname #1\endcsname{%
+      \partname\nobreakspace\thepart
     }{%
-      \thepart.\nobreakspace\partname%
+      \thepart.\nobreakspace\partname
     }{}{%
       \FixL@patchfailed{\part}%
     }%
@@ -142,7 +141,7 @@
   \AtBeginDocument{\@ifpackageloaded{#1}{#2}{}}}
 \newcommand{\FixL@translate}[3]{%
   \FixL@inpackage{#1}{%
-    \expandafter\renewcommand\csname#2\endcsname{#3}%
+    \expandafter\renewcommand\csname #2\endcsname{#3}%
   }}
 \FixL@translate{algorithm}{listalgorithmname}{Algoritmu saraksts}
 \FixL@inpackage{algorithm}{\floatname{algorithm}{Algoritms}}

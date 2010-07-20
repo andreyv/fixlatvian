@@ -3,7 +3,7 @@
 % Copyright (C) Andrey Vihrov <andrey.vihrov@gmail.com>, 2010
 % Copyright (C) Madars Virza <madars@gmail.com>, 2010
 % -------------------------------------------------------
-% 
+%
 % This file may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License, either version 1.2
 % of this license or (at your option) any later version.
@@ -11,7 +11,7 @@
 %
 %    http://www.latex-project.org/lppl.txt
 %
-% and version 1.2 or later is part of all distributions of LaTeX 
+% and version 1.2 or later is part of all distributions of LaTeX
 % version 1999/12/01 or later.
 %
 % \fi
@@ -40,8 +40,12 @@
 }
 \setcounter{IndexColumns}{2}
 \setcounter{tocdepth}{2}
+\newenvironment{example}{\begin{quote}}{\end{quote}}
+\newcommand{\optstar}{\meta{\textup{\texttt{*}}}}
+\newcommand{\pack}[1]{\mbox{\textsf{#1}}}
+\providecommand{\MakeIndex}{\mbox{\textit{MakeIndex}}}
 
-\EnableCrossrefs         
+\EnableCrossrefs
 \CodelineIndex
 \RecordChanges
 
@@ -88,10 +92,9 @@
 %   \frenchspacing,\nonfrenchspacing,\ExecuteOptions,\ifcase,\or,\@ctrerr,%
 %   \MakePerPage,\caption,\thetable,\,,\thefigure,\@empty,\lst@@caption,%
 %   \ifx,\thelstlisting}
-% 
 %
-% \title{\textsf{FixLatvian} pakotne\thanks{Versija~\fileversion{}
-%   (\filedate).}}
+%
+% \title{\pack{FixLatvian} pakotne\thanks{Versija~\fileversion{} (\filedate).}}
 % \author{Andrejs Vihrovs \email{andrey.vihrov@gmail.com}
 %   \and Madars Virza \email{madars@gmail.com}}
 %
@@ -111,9 +114,9 @@
 % \section{Lietošana}
 % \subsection{Pakotnes pieslēgšana}
 % Pakotni pieslēdz ar |\usepackage{fixlatvian}| komandu. Tās ielādes laikā
-% tiek pieslēgta arī \textsf{Polyglossia} pakotne, kā arī dokumenta valoda
-% tiek uzstādīta uz |latvian|. \textsf{FixLatvian} pakotne būtu jāpieslēdz
-% pēc \textsf{Hyperref} pakotnes, ja tāda tiek izmantota.
+% tiek pieslēgta arī \pack{Polyglossia} pakotne, kā arī dokumenta valoda
+% tiek uzstādīta uz |latvian|. \pack{FixLatvian} pakotne būtu jāpieslēdz
+% pēc \pack{Hyperref} pakotnes, ja tāda tiek izmantota.
 %
 % \subsection{Numerācija ar punktiem}
 % \label{sec:numbering}
@@ -132,10 +135,10 @@
 % <<apakšnodaļa~\nref{sec:numbering}>>. Šim gadījumam ir paredzētas |\nref|
 % un |\npageref| komandas, kuru lietošanas sintakse ir līdzīga |\ref| un
 % |\pageref| komandām:
-% \begin{quote}
-%   |\nref|\meta{$*$}\marg{iezīme}\\
-%   |\npageref|\meta{$*$}\marg{iezīme}
-% \end{quote}
+% \begin{example}
+%   |\nref|\optstar\marg{iezīme}\\
+%   |\npageref|\optstar\marg{iezīme}
+% \end{example}
 %
 % \subsection{Daļu un nodaļu virsraksti}
 % \DescribeMacro{\part}
@@ -146,13 +149,13 @@
 % numurētas ar arābu cipariem.
 %
 % \subsection{Nosaukumu tulkojumi}
-% \textsf{FixLatvian} pakotne satur vairāku nosaukumu un tekstu tulkojumus
-% papildus tam, ko jau piedāvā \textsf{Polyglossia} pakotne. Tulkojamo
+% \pack{FixLatvian} pakotne satur vairāku nosaukumu un tekstu tulkojumus
+% papildus tam, ko jau piedāvā \pack{Polyglossia} pakotne. Tulkojamo
 % tekstu saraksts satur gan dažas \LaTeX{} komandas, gan pakotņu
-%   \textsf{Algorithms},
-%   \textsf{Appendix},
-%   \textsf{Doc},
-%   \textsf{Listings}
+%   \pack{Algorithms},
+%   \pack{Appendix},
+%   \pack{Doc},
+%   \pack{Listings}
 % komandas.
 %
 % \DescribeMacro{\alph}
@@ -166,9 +169,9 @@
 % Pēc noklusējuma tiek uzstādīts vienāds atstarpju garums pēc visiem
 % simboliem. Lai pēc pieturzīmēm tiktu liktas lielākas atstarpes, kā pieņemts
 % angļu valodā, pakotnei jāpadod parametrs |nonfrenchspacing|:
-% \begin{quote}
+% \begin{example}
 %   |\usepackage[nonfrenchspacing]{fixlatvian}|
-% \end{quote}
+% \end{example}
 %
 % \subsubsection{Zemteksta piezīmes}
 % \DescribeMacro{\footnote}
@@ -209,8 +212,7 @@
 % \begin{macro}{\FixL@info}
 % Definē brīdinājumu un paziņojumu izvada komandas.
 %    \begin{macrocode}
-\newcommand{\FixL@warning}[1]{%
-  \PackageWarning{fixlatvian}{#1}}
+\newcommand{\FixL@warning}[1]{\PackageWarning{fixlatvian}{#1}}
 \newcommand{\FixL@warning@noline}[1]{%
   \PackageWarningNoLine{fixlatvian}{#1}}
 \newcommand{\FixL@info}[1]{\PackageInfo{fixlatvian}{#1}}
@@ -219,18 +221,18 @@
 % \end{macro}
 % \end{macro}
 %
-% Pārbauda, ka \textsf{Hyperref} pakotne nav tikusi ielādēta \emph{pēc} šīs.
+% Pārbauda, ka \pack{Hyperref} pakotne nav tikusi ielādēta \emph{pēc} šīs.
 %    \begin{macrocode}
 \newif\ifFixL@hyperref@before
 \@ifpackageloaded{hyperref}{\FixL@hyperref@beforetrue}{}
 \AtBeginDocument{%
   \@ifpackageloaded{hyperref}{%
-    \ifFixL@hyperref@before%
-    \else%
+    \ifFixL@hyperref@before
+    \else
       \FixL@warning@noline{%
         This package should be loaded after \space hyperref%
       }%
-    \fi%
+    \fi
   }{}}
 %    \end{macrocode}
 %
@@ -251,8 +253,9 @@
 %
 % \subsection{Numerācija ar punktiem}
 % \begin{macro}{\@seccntformat}
-% Pievieno punktu sekciju u.\,c.\ numuriem virsrakstos. |\@seccntformat| komandas
-% oriģinālā definīcija atrodas \texttt{tex/latex/base/latex.ltx} datnē.
+% Pievieno punktu sekciju u.\,c.\ numuriem virsrakstos. |\@seccntformat|
+% komandas oriģinālā definīcija atrodas \texttt{tex/latex/base/latex.ltx}
+% datnē.
 %    \begin{macrocode}
 \CheckCommand*{\@seccntformat}[1]{\csname the#1\endcsname\quad}
 \renewcommand{\@seccntformat}[1]{%
@@ -262,13 +265,13 @@
 %
 % \begin{macro}{\numberline}
 % Pievieno punktu ierakstiem saturā un citos sarakstos. Ja ieraksta numurs
-% beidzas ne ar ciparu vai latīņu alfabēta burtu, tad punktu neliek. |\numberline|
-% sākuma definīcija atrodas tajā pašā datnē kā |\@seccntformat|.
+% beidzas ne ar ciparu vai latīņu alfabēta burtu, tad punktu neliek.
+% |\numberline| sākuma definīcija atrodas tajā pašā datnē kā |\@seccntformat|.
 %    \begin{macrocode}
-\let\FixL@save@numberline\numberline
+\let\FixL@old@numberline\numberline
 \renewcommand{\numberline}[1]{%
   \StrRight{#1}{1}[\FixL@temp@a]%
-  \FixL@save@numberline{#1%
+  \FixL@old@numberline{#1%
     \IfSubStr{\FixL@alnum}{\FixL@temp@a}{.}{}%
   }}
 %    \end{macrocode}
@@ -277,12 +280,12 @@
 % \begin{macro}{\nref}
 % \begin{macro}{\npageref}
 % Saglabā vecas |\ref| un |\pageref| versijas |\nref| un |\npageref| komandās.
-% \textsf{Hyperref} pakotne pārdefinē šīs komandas |\begin{document}| izpildes
-% laikā, tāpēc \textsf{FixLatvian} pakotnes definīcijas jāievieš pēc tam.
+% \pack{Hyperref} pakotne pārdefinē šīs komandas |\begin{document}| izpildes
+% laikā, tāpēc \pack{FixLatvian} pakotnes definīcijas jāievieš pēc tam.
 %    \begin{macrocode}
 \AtBeginDocument{%
-  \let\nref\ref%
-  \let\npageref\pageref%
+  \let\nref\ref
+  \let\npageref\pageref
 }
 %    \end{macrocode}
 % \end{macro}
@@ -297,18 +300,18 @@
 % Sākumā definē komandu, kas būs pamats visām lietotāja līmeņa komandām.
 %    \begin{macrocode}
 \newcommand{\FixL@ref@base}[4]{%
-  \begingroup%
+  \begingroup
     \newcommand{\FixL@temp@b}{\csname n#1\endcsname#2{#4}.\@}%
     \IfStrEq{#3}{hyper}{\hyperref[#4]{\FixL@temp@b}}{\FixL@temp@b}%
-  \endgroup%
-  \nobreak%
+  \endgroup
+  \nobreak
 }
 %    \end{macrocode}
 %
 % Pēc tam definē pašas komandas, izmantojot iepriekš izveidoto. Padara
-% iespējamu šo komandu izmantošanu <<kustīgajos parametros>>.\footnote{
-% \texttt{\string\DeclareRobustCommand} kaut kā nedarbojas ar
-% \textsf{Hyperref} versijām\ldots}
+% iespējamu šo komandu izmantošanu <<kustīgajos parametros>>.\footnote{^^A
+% \texttt{\string\DeclareRobustCommand} kaut kā nedarbojas ar \pack{Hyperref}
+% versijām\ldots}
 %    \begin{macrocode}
 \AtBeginDocument{%
   \@ifpackageloaded{hyperref}{%
@@ -341,12 +344,12 @@
 %    \begin{macrocode}
 \@ifundefined{@makechapterhead}{}{%
   \patchcmd{\@makechapterhead}{%
-    \@chapapp\space \thechapter%
+    \@chapapp\space \thechapter
   }{%
     \IfStrEq{\@chapapp}{\appendixname}{%
-      \@chapapp\space\thechapter%
+      \@chapapp\space\thechapter
     }{%
-      \thechapter.\nobreakspace\@chapapp%
+      \thechapter.\nobreakspace\@chapapp
     }%
   }{}{%
     \FixL@patchfailed{\chapter}%
@@ -355,16 +358,16 @@
 % \end{macro}
 %
 % \begin{macro}{\@part}
-% To pašu dara arī ar daļu virsrakstiem. \textsf{Hyperref} pakotne izveido savu
+% To pašu dara arī ar daļu virsrakstiem. \pack{Hyperref} pakotne izveido savu
 % |\part| definīciju, tāpēc šis gadījums arī jāņem vērā.
 %    \begin{macrocode}
 \newcommand{\FixL@fix@part}[1]{%
   \@ifundefined{#1}{}{%
     \renewcommand{\thepart}{\arabic{part}}%
-    \expandafter\patchcmd\csname#1\endcsname{%
-      \partname\nobreakspace\thepart%
+    \expandafter\patchcmd\csname #1\endcsname{%
+      \partname\nobreakspace\thepart
     }{%
-      \thepart.\nobreakspace\partname%
+      \thepart.\nobreakspace\partname
     }{}{%
       \FixL@patchfailed{\part}%
     }%
@@ -453,13 +456,13 @@
   \AtBeginDocument{\@ifpackageloaded{#1}{#2}{}}}
 \newcommand{\FixL@translate}[3]{%
   \FixL@inpackage{#1}{%
-    \expandafter\renewcommand\csname#2\endcsname{#3}%
+    \expandafter\renewcommand\csname #2\endcsname{#3}%
   }}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
 %
-% \subsubsection{Pakotnes \textsf{Algorithms} atbalsts}
+% \subsubsection{Pakotnes \pack{Algorithms} atbalsts}
 % \begin{macro}{\listalgorithmname}
 % Izmaina algoritmu saraksta nosaukumu.
 %    \begin{macrocode}
@@ -472,7 +475,7 @@
 \FixL@inpackage{algorithm}{\floatname{algorithm}{Algoritms}}
 %    \end{macrocode}
 %
-% \subsubsection{Pakotnes \textsf{Appendix} atbalsts}
+% \subsubsection{Pakotnes \pack{Appendix} atbalsts}
 % \begin{macro}{\appendixtocname}
 % Izmaina pielikumu sadaļas virsrakstu saturā.
 %    \begin{macrocode}
@@ -480,7 +483,7 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \subsubsection{Pakotnes \textsf{Doc} atbalsts}
+% \subsubsection{Pakotnes \pack{Doc} atbalsts}
 % \begin{macro}{\GlossaryPrologue}
 % \begin{macro}{\IndexPrologue}
 % \begin{macro}{\generalname}
@@ -506,10 +509,10 @@
 % \end{macro}
 % \end{macro}
 %
-% Ir pieejama arī latviskota \textsf{MakeIndex} stila datne \textsf{Doc}
+% Ir pieejama arī latviskota \MakeIndex{} stila datne \pack{Doc}
 % rādītāja izveidei.
 %
-% \subsubsection{Pakotnes \textsf{Listings} atbalsts}
+% \subsubsection{Pakotnes \pack{Listings} atbalsts}
 % \begin{macro}{\lstlistlistingname}
 % Izmaina pirmkoda tekstu saraksta nosaukumu.
 %    \begin{macrocode}
@@ -526,7 +529,7 @@
 % \end{macro}
 %
 % \begin{macro}{\fnum@lstlisting}
-% Izmaina tekstu bloka virsraksta struktūru.
+% Izmaina pirmkoda tekstu bloku virsraksta struktūru.
 %    \begin{macrocode}
 \FixL@translate{listings}{fnum@lstlisting}{%
   \ifx\lst@@caption\@empty\else\thelstlisting.\,\fi\lstlistingname}
