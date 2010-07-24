@@ -32,7 +32,7 @@
 \usepackage{fixltx2e}
 \usepackage{metalogo}
 \usepackage[toc]{multitoc}
-\usepackage[bookmarksdepth=3]{hyperref}
+\usepackage[bookmarksdepth=3,hyperindex=false,colorlinks]{hyperref}
 \usepackage{fixlatvian}
 
 \newcommand{\email}[1]{%
@@ -44,6 +44,8 @@
 \newcommand{\optstar}{\meta{\textup{\texttt{*}}}}
 \newcommand{\pack}[1]{\mbox{\textsf{#1}}}
 \providecommand{\MakeIndex}{\mbox{\textit{MakeIndex}}}
+\let\oldusage\usage
+\renewcommand{\usage}[1]{\oldusage{\hyperpage{#1}}}
 
 \EnableCrossrefs
 \CodelineIndex
