@@ -35,9 +35,7 @@
 \usepackage[bookmarksdepth=3,hyperindex=false,colorlinks]{hyperref}
 \usepackage{fixlatvian}
 
-\newcommand{\email}[1]{%
-  \href{mailto:#1}{\nolinkurl{<#1>}}%
-}
+\newcommand{\email}[1]{\href{mailto:#1}{\nolinkurl{<#1>}}}
 \setcounter{IndexColumns}{2}
 \setcounter{tocdepth}{2}
 \newenvironment{example}{\begin{quote}}{\end{quote}}
@@ -303,7 +301,7 @@
 %    \begin{macrocode}
 \newcommand{\FixL@ref@base}[4]{%
   \begingroup
-    \newcommand{\FixL@temp@b}{\csname n#1\endcsname#2{#4}.\@}%
+    \newcommand{\FixL@temp@b}{\csname n#1\endcsname #2{#4}.\@}%
     \IfStrEq{#3}{hyper}{\hyperref[#4]{\FixL@temp@b}}{\FixL@temp@b}%
   \endgroup
   \nobreak
