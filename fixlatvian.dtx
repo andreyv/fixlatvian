@@ -32,18 +32,26 @@
 \usepackage{fixltx2e}
 \usepackage{metalogo}
 \usepackage[toc]{multitoc}
-\usepackage[bookmarksdepth=3,hyperindex=false,colorlinks]{hyperref}
+\usepackage[hyperindex=false]{hyperref}
 \usepackage{fixlatvian}
 
-\newcommand{\email}[1]{\href{mailto:#1}{\nolinkurl{<#1>}}}
 \setcounter{IndexColumns}{2}
 \setcounter{tocdepth}{2}
+\let\oldusage\usage
+\renewcommand{\usage}[1]{\oldusage{\hyperpage{#1}}}
+\hypersetup{%
+  bookmarksdepth=3,%
+  colorlinks=true,%
+  linkcolor=blue,%
+  linktoc=all,%
+  urlcolor=cyan%
+}
+
+\providecommand{\email}[1]{\href{mailto:#1}{\nolinkurl{<#1>}}}
 \newenvironment{example}{\begin{quote}}{\end{quote}}
 \newcommand{\optstar}{\meta{\textup{\texttt{*}}}}
 \newcommand{\pack}[1]{\mbox{\textsf{#1}}}
 \providecommand{\MakeIndex}{\mbox{\textit{MakeIndex}}}
-\let\oldusage\usage
-\renewcommand{\usage}[1]{\oldusage{\hyperpage{#1}}}
 
 \EnableCrossrefs
 \CodelineIndex
