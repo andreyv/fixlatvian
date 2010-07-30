@@ -29,9 +29,11 @@
 %<*driver>
 \documentclass[a4paper]{ltxdoc}
 
+\usepackage{fancyvrb}
 \usepackage{fixltx2e}
 \usepackage{metalogo}
 \usepackage[toc]{multitoc}
+\usepackage{nicefrac}
 \usepackage[hyperindex=false]{hyperref}
 \usepackage{fixlatvian}
 
@@ -46,6 +48,7 @@
   linktoc=all,%
   urlcolor=cyan%
 }
+\VerbatimFootnotes
 
 \providecommand{\email}[1]{\href{mailto:#1}{\nolinkurl{<#1>}}}
 \newenvironment{example}{\begin{quote}}{\end{quote}}
@@ -88,18 +91,19 @@
 %
 % \GetFileInfo{fixlatvian.dtx}
 %
-% \DoNotIndex{\@chapapp,\@ifpackageloaded,\@ifstar,\@ifundefined,\arabic,%
-%   \AtBeginDocument,\begingroup,\captionslatvian,\CheckCommand,\csname,%
-%   \else,\endcsname,\endgroup,\expandafter,\fi,\FixL@hyperref@beforetrue,%
-%   \FixL@temp@a,\FixL@temp@b,\gappto,\hyperref,\ifcodeline@index,\space,%
-%   \IfStrEq,\IfSubStr,\ignorespaces,\let,\markboth,\newcommand,\newif,%
-%   \nobreakspace,\PackageWarning,\PackageWarningNoLine,\patchcmd,\quad,%
-%   \renewcommand,\RequirePackage,\section,\setdefaultlanguage,\StrRight,%
-%   \thechapter,\thepart,\hspace,\PackageInfo,\protect,\chapter,\part,%
-%   \@,\nobreak,\relax,\ProcessOptions,\floatname,\robustify,\DeclareOption,%
-%   \frenchspacing,\nonfrenchspacing,\ExecuteOptions,\ifcase,\or,\@ctrerr,%
-%   \MakePerPage,\caption,\thetable,\,,\thefigure,\@empty,\lst@@caption,%
-%   \ifx,\thelstlisting,\appendixname}
+% \DoNotIndex{\@chapapp,\@ifpackageloaded,\@ifstar,\@ifundefined,\arabic,
+%   \AtBeginDocument,\begingroup,\captionslatvian,\CheckCommand,\csname,
+%   \else,\endcsname,\endgroup,\expandafter,\fi,\FixL@hyperref@beforetrue,
+%   \FixL@tempa,\FixL@tempb,\gappto,\hyperref,\ifcodeline@index,\space,
+%   \IfStrEq,\IfSubStr,\ignorespaces,\let,\markboth,\newcommand,\newif,
+%   \nobreakspace,\PackageWarning,\PackageWarningNoLine,\patchcmd,\quad,
+%   \renewcommand,\RequirePackage,\section,\setdefaultlanguage,\StrRight,
+%   \thechapter,\thepart,\hspace,\PackageInfo,\protect,\chapter,\part,
+%   \@,\nobreak,\relax,\ProcessOptions,\floatname,\robustify,\DeclareOption,
+%   \frenchspacing,\nonfrenchspacing,\ExecuteOptions,\ifcase,\or,\@ctrerr,
+%   \MakePerPage,\caption,\thetable,,\thefigure,\@empty,\lst@@caption,\ifx,
+%   \thelstlisting,\appendixname,\fontdimen,\font,\FixL@tempc,\futurelet,
+%   \ifcat,\noexpand,\thinspace,\DeclareRobustCommand,\FixL@maybespace@}
 %
 %
 % \title{\pack{FixLatvian} pakotne\thanks{Versija~\fileversion{} (\filedate).}}
@@ -148,13 +152,32 @@
 %   |\npageref|\optstar\marg{iezīme}
 % \end{example}
 %
+% \DescribeMacro{\AfterNumSpace}
+% Pēc numuriem ar punktiem tiek liktas mazākas atstarpes (starpvārdu atstarpes
+% \nicefrac{2}{3} garumā),\footnote{Zināmais izņēmums: gadījums, kad pēc |\Num|,
+% |\ref| vai līdzīgas komandas tukšums uzdots nevis tiešā veidā, bet ar kādu
+% citu komandu, piemēram, |\space|.} lai kompensētu punkta veidoto papildus
+% tukšumu. Šo atstarpju garumu nosaka |\AfterNumSpace| komanda. To var mainīt
+% pēc autora patikas; piemēram, sekojošā komanda atgriež starpvārdu atstarpei
+% vienlīdzīgu tukšumu:
+% \begin{example}
+%   |\renewcommand{\AfterNumSpace}{\space}|
+% \end{example}
+%
+% \DescribeMacro{\Num}
+% Lai manuāli iegūtu kārtas skaitļu noformējumu kā citās vietās, var lietot
+% |\Num| komandu:
+% \begin{example}
+%   |\Num|\marg{kārtas skaitlis (bez punkta)}
+% \end{example}
+%
 % \subsection{Daļu un nodaļu virsraksti}
 % \DescribeMacro{\part}
 % \DescribeMacro{\chapter}
 % Standarta \LaTeX{} dokumentu klašu daļu un nodaļu virsrakstos numurs tagad
-% ir pirms vārda, nevis pēc (piem., <<1.~nodaļa>>). Izņēmums ir pielikumu
-% virsraksts, kas saglabā veco kārtību (<<Pielikums~A>>). Daļas tiek
-% numurētas ar arābu cipariem.
+% ir pirms vārda, nevis pēc (piem., <<\Num{1} nodaļa>>). Izņēmums ir pielikumu
+% virsraksts, kas saglabā veco kārtību (<<Pielikums~A>>). Daļas tiek numurētas
+% ar arābu cipariem.
 %
 % \subsection{Nosaukumu tulkojumi}
 % \pack{FixLatvian} pakotne satur vairāku nosaukumu un tekstu tulkojumus
@@ -187,7 +210,7 @@
 %
 % \subsubsection{Attēlu un tabulu virsraksti}
 % \DescribeMacro{\caption}
-% Attēlu un tabulu virsraksti tagad ir formā <<1.\,att.~Nosaukums>>.
+% Attēlu un tabulu virsraksti tagad ir formā <<\Num{1} att.~Nosaukums>>.
 %
 % \StopEventually{}
 %
@@ -260,14 +283,56 @@
 % \end{macro}
 %
 % \subsection{Numerācija ar punktiem}
+% \begin{macro}{\AfterNumSpace}
+% Definē mazāka garuma atstarpi lietošanai pēc numuriem, kas ņem vērā punkta
+% ieviesto papildus horizontālo tukšumu.
+%    \begin{macrocode}
+\newcommand{\FixL@spacescale}{.66667}
+\newcommand{\AfterNumSpace}{\hspace{\FixL@spacescale\fontdimen2\font
+  plus \FixL@spacescale\fontdimen3\font
+  minus \FixL@spacescale\fontdimen4\font
+}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\Num}
+% \begin{macro}{\FixL@p}
+% \begin{macro}{\FixL@ps}
+% \begin{macro}{\FixL@maybespace}
+% Definē punkta pievienošanas komandas.
+%    \begin{macrocode}
+\DeclareRobustCommand{\Num}[1]{#1\FixL@p\FixL@maybespace}
+\newcommand{\FixL@p}{.\@\nobreak}
+\newcommand{\FixL@ps}{\FixL@p\AfterNumSpace}
+\newcommand{\FixL@maybespace}{\futurelet\FixL@tempc\FixL@maybespace@}
+\newcommand{\FixL@maybespace@}{%
+  \ifcat\space\noexpand\FixL@tempc
+    \AfterNumSpace\ignorespaces
+  \fi
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\datelatvian}
+% Aizvieto <<|.\thinspace|>> virkni ar |\FixL@ps| komandu \pack{Polyglossia}
+% pakotnes definētā |\datelatvian| komandā.
+%    \begin{macrocode}
+\patchcmd{\datelatvian}{.\thinspace}{\FixL@ps}{}{%
+  \FixL@patchfailed{\datelatvian}}
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{\@seccntformat}
 % Pievieno punktu sekciju u.\,c.\ numuriem virsrakstos. |\@seccntformat|
 % komandas oriģinālā definīcija atrodas \texttt{tex/latex/base/latex.ltx}
-% datnē.
+% datnē. Šeit atstarpe pēc punkta nav tas pats kā |\AfterNumSpace|.
 %    \begin{macrocode}
 \CheckCommand*{\@seccntformat}[1]{\csname the#1\endcsname\quad}
 \renewcommand{\@seccntformat}[1]{%
-  \csname the#1\endcsname.\hspace{.66667em}}
+  \csname the#1\endcsname\FixL@p\hspace{.66667em}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -278,9 +343,9 @@
 %    \begin{macrocode}
 \let\FixL@old@numberline\numberline
 \renewcommand{\numberline}[1]{%
-  \StrRight{#1}{1}[\FixL@temp@a]%
+  \StrRight{#1}{1}[\FixL@tempa]%
   \FixL@old@numberline{#1%
-    \IfSubStr{\FixL@alnum}{\FixL@temp@a}{.}{}%
+    \IfSubStr{\FixL@alnum}{\FixL@tempa}{\FixL@p}{}%
   }}
 %    \end{macrocode}
 % \end{macro}
@@ -301,25 +366,24 @@
 %
 % \begin{macro}{\ref}
 % \begin{macro}{\pageref}
-% Izveido |\ref| un |\pageref| jaunās versijas~--- ar punktiem. Neļauj \LaTeX{}
-% sākt jaunu teikumu pēc punkta, tadējādi saglabājot normālu attālumu
-% starp vārdiem; neatļauj arī rindas beigas tieši pēc punkta.
+% Izveido |\ref| un |\pageref| jaunās versijas~--- ar punktiem. Pēc punkta
+% neatļauj teikuma beigas (svarīgs tikai ar |\nonfrenchspacing|). Ja turklāt
+% pēc punkta seko tukšumsimboli, tos aizstāj ar |\AfterNumSpace|.
 %
 % Sākumā definē komandu, kas būs pamats visām lietotāja līmeņa komandām.
 %    \begin{macrocode}
 \newcommand{\FixL@ref@base}[4]{%
   \begingroup
-    \newcommand{\FixL@temp@b}{\csname n#1\endcsname #2{#4}.\@}%
-    \IfStrEq{#3}{hyper}{\hyperref[#4]{\FixL@temp@b}}{\FixL@temp@b}%
+    \newcommand{\FixL@tempb}{\csname n#1\endcsname #2{#4}\FixL@p}%
+    \IfStrEq{#3}{hyper}{\hyperref[#4]{\FixL@tempb}}{\FixL@tempb}%
   \endgroup
-  \nobreak
+  \FixL@maybespace
 }
 %    \end{macrocode}
 %
 % Pēc tam definē pašas komandas, izmantojot iepriekš izveidoto. Padara
 % iespējamu šo komandu izmantošanu <<kustīgajos parametros>>.\footnote{^^A
-% \texttt{\string\DeclareRobustCommand} kaut kā nedarbojas ar \pack{Hyperref}
-% versijām\ldots}
+% |\DeclareRobustCommand| kaut kā nedarbojas ar \pack{Hyperref} versijām\ldots}
 %    \begin{macrocode}
 \AtBeginDocument{%
   \@ifpackageloaded{hyperref}{%
@@ -342,10 +406,10 @@
 %
 % \subsection{Daļu un nodaļu virsraksti}
 % \begin{macro}{\@makechapterhead}
-% Izmaina nodaļu virsrakstu vārdu secību no <<Nodaļa~1>> uz <<1.~nodaļa>> (bet
-% atstāj <<Pielikums~A>>). Ja <<|\@chapapp\space \thechapter|>> virkne nav
-% atrodama |\@makechapterhead| komandā, pieņem, ka lietotājs izveidojis savu
-% variantu, un neko nedara.
+% Izmaina nodaļu virsrakstu vārdu secību no <<Nodaļa~1>> uz <<\Num{1} nodaļa>>
+% (bet atstāj <<Pielikums~A>>). Ja <<|\@chapapp\space \thechapter|>> virkne
+% nav atrodama |\@makechapterhead| komandā, pieņem, ka lietotājs izveidojis
+% savu variantu, un neko nedara.
 % ^^A XXX To Madars: when you will be adding Memoir support, add only a
 % ^^A \@ifclassloaded check here and do the real work in a new subsubsection
 % ^^A of subsection 3.7.
@@ -357,7 +421,7 @@
     \IfStrEq{\@chapapp}{\appendixname}{%
       \@chapapp\space\thechapter
     }{%
-      \thechapter.\nobreakspace\@chapapp
+      \thechapter\FixL@ps\@chapapp
     }%
   }{}{%
     \FixL@patchfailed{\chapter}%
@@ -375,7 +439,7 @@
     \expandafter\patchcmd\csname #1\endcsname{%
       \partname\nobreakspace\thepart
     }{%
-      \thepart.\nobreakspace\partname
+      \thepart\FixL@ps\partname
     }{}{%
       \FixL@patchfailed{\part}%
     }%
@@ -449,8 +513,8 @@
 % \begin{macro}{\fnum@table}
 % Izmaina attēlu un tabulu virsrakstu struktūru.
 %    \begin{macrocode}
-\renewcommand{\fnum@figure}{\thefigure.\,\figurename}
-\renewcommand{\fnum@table}{\thetable.\,\tablename}
+\renewcommand{\fnum@figure}{\thefigure\FixL@ps\figurename}
+\renewcommand{\fnum@table}{\thetable\FixL@ps\tablename}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -532,7 +596,7 @@
 % Izmaina pirmkoda tekstu bloku nosaukumu.
 %    \begin{macrocode}
 \FixL@translate{listings}{lstlistingname}{%
-  \ifx\lst@@caption P\else p\fi irmkods}
+  \ifx\lst@@caption\@empty P\else p\fi irmkods}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -540,7 +604,12 @@
 % Izmaina pirmkoda tekstu bloku virsraksta struktūru.
 %    \begin{macrocode}
 \FixL@translate{listings}{fnum@lstlisting}{%
-  \ifx\lst@@caption\@empty\else\thelstlisting.\,\fi\lstlistingname}
+  \ifx\lst@@caption\@empty
+  \else
+    \thelstlisting\FixL@ps
+  \fi
+  \lstlistingname
+}
 %    \end{macrocode}
 % \end{macro}
 %
