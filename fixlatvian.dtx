@@ -120,8 +120,8 @@
 % veida uzlabojumu apkopojums; tā ir izveidota ar mērķi atvieglot latviešu
 % \LaTeX{} lietotāja darbu.
 %
-% Pakotne ir jālieto kopā ar \XeTeX{} dzini. Parasti to palaiž ar
-% \texttt{xelatex} komandu.
+% Pakotne ir jālieto kopā ar \XeTeX{} dzini. \LaTeX{} formātu šajā gadījumā
+% parasti ielādē ar \texttt{xelatex} komandu.
 %
 % \section{Lietošana}
 % \subsection{Pakotnes pieslēgšana}
@@ -154,12 +154,12 @@
 %
 % \DescribeMacro{\AfterNumSpace}
 % Pēc numuriem ar punktiem tiek liktas mazākas atstarpes (starpvārdu atstarpes
-% \nicefrac{2}{3} garumā),\footnote{Zināmais izņēmums: gadījums, kad pēc |\Num|,
-% |\ref| vai līdzīgas komandas tukšums uzdots nevis tiešā veidā, bet ar kādu
-% citu komandu, piemēram, |\space|.} lai kompensētu punkta veidoto papildus
-% tukšumu. Šo atstarpju garumu nosaka |\AfterNumSpace| komanda. To var mainīt
-% pēc autora patikas; piemēram, sekojošā komanda atgriež starpvārdu atstarpei
-% vienlīdzīgu tukšumu:
+% \nicefrac{2}{3} garumā),\footnote{Zināmais izņēmums: gadījums, kad pēc |\Num|
+% (aprakstīta tālāk), |\ref| vai līdzīgas komandas tukšums uzdots nevis tiešā
+% veidā, bet ar kādu citu komandu, piemēram, |\space|.} lai kompensētu punkta
+% veidoto papildus tukšumu. Šo atstarpju garumu nosaka |\AfterNumSpace|
+% komanda. To var mainīt pēc autora patikas; piemēram, sekojošā komanda atgriež
+% starpvārdu atstarpei vienlīdzīgu tukšumu:
 % \begin{example}
 %   |\renewcommand{\AfterNumSpace}{\space}|
 % \end{example}
@@ -285,7 +285,7 @@
 % \subsection{Numerācija ar punktiem}
 % \begin{macro}{\AfterNumSpace}
 % Definē mazāka garuma atstarpi lietošanai pēc numuriem, kas ņem vērā punkta
-% ieviesto papildus horizontālo tukšumu.
+% ieviesto papildus horizontālu tukšumu.
 %    \begin{macrocode}
 \newcommand{\FixL@spacescale}{.66667}
 \newcommand{\AfterNumSpace}{\hspace{\FixL@spacescale\fontdimen2\font
@@ -299,7 +299,10 @@
 % \begin{macro}{\FixL@p}
 % \begin{macro}{\FixL@ps}
 % \begin{macro}{\FixL@maybespace}
-% Definē punkta pievienošanas komandas.
+% Definē punkta pievienošanas komandas. Pēc punkta neatļauj teikuma beigas
+% (svarīgs tikai ar |\nonfrenchspacing|) un rindas beigas. |\FixL@maybespace|
+% komanda pārbauda, vai nākamais elements ir tukšumsimbols, un šādā gadījumā
+% aizvieto visus sekojošos tukšumsimbolus ar |\AfterNumSpace|.
 %    \begin{macrocode}
 \DeclareRobustCommand{\Num}[1]{#1\FixL@p\FixL@maybespace}
 \newcommand{\FixL@p}{.\@\nobreak}
@@ -366,11 +369,8 @@
 %
 % \begin{macro}{\ref}
 % \begin{macro}{\pageref}
-% Izveido |\ref| un |\pageref| jaunās versijas~--- ar punktiem. Pēc punkta
-% neatļauj teikuma beigas (svarīgs tikai ar |\nonfrenchspacing|). Ja turklāt
-% pēc punkta seko tukšumsimboli, tos aizstāj ar |\AfterNumSpace|.
-%
-% Sākumā definē komandu, kas būs pamats visām lietotāja līmeņa komandām.
+% Izveido |\ref| un |\pageref| jaunās versijas~--- ar punktiem. Sākumā definē
+% komandu, kas būs pamats visām lietotāja līmeņa komandām.
 %    \begin{macrocode}
 \newcommand{\FixL@ref@base}[4]{%
   \begingroup
@@ -503,8 +503,9 @@
 % \subsection{Attēlu un tabulu virsraksti}
 % \begin{macro}{\@makecaption}
 % Pārdefinē standarta |\@makecaption| komandu, lai aizvietotu kolu ar punktu.
+% ^^A Change "\@\space" to "\ " if the \DoNotIndex bug is fixed.
 %    \begin{macrocode}
-\patchcmd{\@makecaption}{#1: #2}{#1.\nobreakspace #2}{}{%
+\patchcmd{\@makecaption}{#1: #2}{#1.\@\space #2}{}{%
   \FixL@patchfailed{\caption}}
 %    \end{macrocode}
 % \end{macro}
