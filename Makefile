@@ -20,11 +20,11 @@ all: $(PACKAGE).sty $(PACKAGE).pdf
 $(PACKAGE).sty: $(PACKAGE).ins $(PACKAGE).dtx
 	$(LATEX) $<
 
-$(PACKAGE).pdf: $(PACKAGE).dtx $(PACKAGE).sty gind.lv.ist
+$(PACKAGE).pdf: $(PACKAGE).dtx $(PACKAGE).sty extra/gind.lv.ist
 	$(LATEX) $<
 	for I in $$(seq 1 $(PASSES)) ; do \
 		$(MAKEINDEX) -s gglo.ist -o $(PACKAGE).gls $(PACKAGE).glo && \
-		$(MAKEINDEX) -s ./gind.lv.ist -o $(PACKAGE).ind $(PACKAGE).idx && \
+		$(MAKEINDEX) -s extra/gind.lv.ist -o $(PACKAGE).ind $(PACKAGE).idx && \
 		$(LATEX) $< \
 	; done
 
