@@ -308,7 +308,7 @@
 \newcommand{\FixL@maybespace}{\futurelet\FixL@tempc\FixL@maybespace@}
 \newcommand{\FixL@maybespace@}{%
   \ifcat\space\noexpand\FixL@tempc
-    \AfterNumSpace\ignorespaces
+    \nobreak\AfterNumSpace\ignorespaces
   \fi
 }
 %    \end{macrocode}
