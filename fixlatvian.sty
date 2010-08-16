@@ -27,6 +27,7 @@
 \RequirePackage{xstring}
 \RequirePackage{etoolbox}
 \RequirePackage{perpage}
+\RequirePackage{caption}
 \RequirePackage{indentfirst}
 \DeclareOption{frenchspacing}{\frenchspacing}
 \DeclareOption{nonfrenchspacing}{\nonfrenchspacing}
@@ -149,10 +150,10 @@
   \ifcase #1\or A\or B\or C\or D\or E\or F\or G\or H\or I\or J\or K\or L%
   \or M\or N\or O\or P\or R\or S\or T\or U\or V\or Z\else\@ctrerr\fi}
 \MakePerPage{footnote}
-\patchcmd{\@makecaption}{#1: #2}{#1.\@\space #2}{}{%
-  \FixL@patchfailed{\caption}}
-\renewcommand{\fnum@figure}{\thefigure\FixL@ps\figurename}
-\renewcommand{\fnum@table}{\thetable\FixL@ps\tablename}
+\DeclareCaptionLabelSeparator{period@}{.\@\space}
+\captionsetup{labelsep=period@}
+\DeclareCaptionLabelFormat{latvian}{#2\FixL@ps #1}
+\captionsetup{labelformat=latvian}
 \newcommand{\FixL@inpackage}[2]{%
   \AtBeginDocument{\@ifpackageloaded{#1}{#2}{}}}
 \newcommand{\FixL@translate}[3]{%
@@ -180,13 +181,6 @@
 \FixL@translate{listings}{lstlistlistingname}{Pirmkoda tekstu saraksts}
 \FixL@translate{listings}{lstlistingname}{%
   \ifx\lst@@caption\@empty P\else p\fi irmkods}
-\FixL@translate{listings}{fnum@lstlisting}{%
-  \ifx\lst@@caption\@empty
-  \else
-    \thelstlisting\FixL@ps
-  \fi
-  \lstlistingname
-}
 \endinput
 %%
 %% End of file `fixlatvian.sty'.

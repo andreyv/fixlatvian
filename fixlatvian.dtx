@@ -99,9 +99,10 @@
 %   \thechapter,\thepart,\hspace,\PackageInfo,\protect,\chapter,\part,
 %   \@,\nobreak,\relax,\ProcessOptions,\floatname,\robustify,\DeclareOption,
 %   \frenchspacing,\nonfrenchspacing,\ExecuteOptions,\ifcase,\or,\@ctrerr,
-%   \MakePerPage,\caption,\thetable,,\thefigure,\@empty,\lst@@caption,\ifx,
-%   \thelstlisting,\appendixname,\fontdimen,\font,\FixL@tempc,\futurelet,
-%   \ifcat,\noexpand,\thinspace,\DeclareRobustCommand,\FixL@maybespace@}
+%   \MakePerPage,\@empty,\lst@@caption,\ifx,\thelstlisting,\appendixname,
+%   \fontdimen,\font,\FixL@tempc,\futurelet,\ifcat,\noexpand,\thinspace,
+%   \DeclareRobustCommand,\FixL@maybespace@,\DeclareCaptionLabelFormat,
+%   \DeclareCaptionLabelSeparator,\captionsetup}
 %
 %
 % \title{\pack{FixLatvian} pakotne\thanks{Versija~\fileversion{} (\filedate).}}
@@ -221,6 +222,7 @@
 \RequirePackage{xstring}
 \RequirePackage{etoolbox}
 \RequirePackage{perpage}
+\RequirePackage{caption}
 %    \end{macrocode}
 %
 % Pieņem, ka pirmajām rindkopām ir atkāpes.
@@ -499,24 +501,17 @@
 %    \end{macrocode}
 %
 % \subsection{Attēlu un tabulu virsraksti}
-% \begin{macro}{\@makecaption}
-% Pārdefinē standarta |\@makecaption| komandu, lai aizvietotu kolu ar punktu.
-% ^^A Change "\@\space" to "\ " if the \DoNotIndex bug is fixed.
+% Izmaina virsraksta pirmās daļas atdalītāju.
 %    \begin{macrocode}
-\patchcmd{\@makecaption}{#1: #2}{#1.\@\space #2}{}{%
-  \FixL@patchfailed{\caption}}
+\DeclareCaptionLabelSeparator{period@}{.\@\space}
+\captionsetup{labelsep=period@}
 %    \end{macrocode}
-% \end{macro}
 %
-% \begin{macro}{\fnum@figure}
-% \begin{macro}{\fnum@table}
-% Izmaina attēlu un tabulu virsrakstu struktūru.
+% Izmaina virsraksta pirmās daļas noformējumu.
 %    \begin{macrocode}
-\renewcommand{\fnum@figure}{\thefigure\FixL@ps\figurename}
-\renewcommand{\fnum@table}{\thetable\FixL@ps\tablename}
+\DeclareCaptionLabelFormat{latvian}{#2\FixL@ps #1}
+\captionsetup{labelformat=latvian}
 %    \end{macrocode}
-% \end{macro}
-% \end{macro}
 %
 % \subsection{Citu pakotņu atbalsts}
 % \begin{macro}{\FixL@inpackage}
@@ -596,19 +591,6 @@
 %    \begin{macrocode}
 \FixL@translate{listings}{lstlistingname}{%
   \ifx\lst@@caption\@empty P\else p\fi irmkods}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\fnum@lstlisting}
-% Izmaina pirmkoda tekstu bloku virsraksta struktūru.
-%    \begin{macrocode}
-\FixL@translate{listings}{fnum@lstlisting}{%
-  \ifx\lst@@caption\@empty
-  \else
-    \thelstlisting\FixL@ps
-  \fi
-  \lstlistingname
-}
 %    \end{macrocode}
 % \end{macro}
 %
