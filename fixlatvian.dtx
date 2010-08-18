@@ -102,7 +102,7 @@
 %   \MakePerPage,\@empty,\lst@@caption,\ifx,\thelstlisting,\appendixname,
 %   \fontdimen,\font,\FixL@tempc,\futurelet,\ifcat,\noexpand,\thinspace,
 %   \DeclareRobustCommand,\FixL@maybespace@,\DeclareCaptionLabelFormat,
-%   \DeclareCaptionLabelSeparator,\captionsetup}
+%   \DeclareCaptionLabelSeparator,\captionsetup,\@for,\do}
 %
 %
 % \title{\pack{FixLatvian} pakotne\thanks{Versija~\fileversion{} (\filedate).}}
@@ -335,8 +335,8 @@
 % Aizvieto <<|.\thinspace|>> virkni ar |\FixL@ps| komandu \pack{Polyglossia}
 % pakotnes definētā |\datelatvian| komandā.
 %    \begin{macrocode}
-\patchcmd{\datelatvian}{.\thinspace}{\FixL@ps}{}{%
-  \FixL@patchfailed{\datelatvian}}
+\@for \FixL@tempd := 1,2 \do{\patchcmd{\datelatvian}{.\thinspace}{\FixL@ps}{}{%
+  \FixL@patchfailed{\datelatvian}}}
 %    \end{macrocode}
 % \end{macro}
 %
