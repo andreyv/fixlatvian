@@ -69,8 +69,10 @@
     \nobreak\AfterNumSpace\ignorespaces
   \fi
 }
-\@for \FixL@tempd := 1,2 \do{\patchcmd{\datelatvian}{.\thinspace}{\FixL@ps}{}{%
-  \FixL@patchfailed{\datelatvian}}}
+\@for \FixL@tempd := 1,2 \do{%
+  \patchcmd{\datelatvian}{.\thinspace}{\FixL@ps}{}{%
+    \FixL@patchfailed{\datelatvian}%
+  }}
 \CheckCommand*{\@seccntformat}[1]{\csname the#1\endcsname\quad}
 \renewcommand{\@seccntformat}[1]{%
   \csname the#1\endcsname\FixL@p\hspace{.66667em}}
