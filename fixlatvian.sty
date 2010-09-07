@@ -55,24 +55,7 @@
 }
 \newcommand{\FixL@patchfailed}[1]{%
   \FixL@info{Could not change the definition of the \protect #1 command}}
-\newcommand{\FixL@spacescale}{.66667}
-\newcommand{\AfterNumSpace}{\hspace{\FixL@spacescale\fontdimen2\font
-  plus \FixL@spacescale\fontdimen3\font
-  minus \FixL@spacescale\fontdimen4\font
-}}
-\DeclareRobustCommand{\Num}[1]{#1\FixL@p\FixL@maybespace}
 \newcommand{\FixL@p}{.\@\nobreak}
-\newcommand{\FixL@ps}{\FixL@p\AfterNumSpace}
-\newcommand{\FixL@maybespace}{\futurelet\FixL@tempc\FixL@maybespace@}
-\newcommand{\FixL@maybespace@}{%
-  \ifcat\space\noexpand\FixL@tempc
-    \nobreak\AfterNumSpace\ignorespaces
-  \fi
-}
-\@for \FixL@tempd := 1,2 \do{%
-  \patchcmd{\datelatvian}{.\thinspace}{\FixL@ps}{}{%
-    \FixL@patchfailed{\datelatvian}%
-  }}
 \CheckCommand*{\@seccntformat}[1]{\csname the#1\endcsname\quad}
 \renewcommand{\@seccntformat}[1]{%
   \csname the#1\endcsname\FixL@p\hspace{.66667em}}
@@ -91,7 +74,7 @@
     \newcommand{\FixL@tempb}{\csname n#1\endcsname #2{#4}\FixL@p}%
     \IfStrEq{#3}{hyper}{\hyperref[#4]{\FixL@tempb}}{\FixL@tempb}%
   \endgroup
-  \FixL@maybespace
+  \nobreak % Extra \nobreak
 }
 \AtBeginDocument{%
   \@ifpackageloaded{hyperref}{%
@@ -115,7 +98,7 @@
     \IfStrEq{\@chapapp}{\appendixname}{%
       \@chapapp\space\thechapter
     }{%
-      \thechapter\FixL@ps\@chapapp
+      \thechapter\FixL@p\space\@chapapp
     }%
   }{}{%
     \FixL@patchfailed{\chapter}%
@@ -126,7 +109,7 @@
     \expandafter\patchcmd\csname #1\endcsname{%
       \partname\nobreakspace\thepart
     }{%
-      \thepart\FixL@ps\partname
+      \thepart\FixL@p\space\partname
     }{}{%
       \FixL@patchfailed{\part}%
     }%
@@ -155,7 +138,7 @@
 \MakePerPage{footnote}
 \DeclareCaptionLabelSeparator{period@}{.\@\space}
 \captionsetup{labelsep=period@}
-\DeclareCaptionLabelFormat{latvian}{#2\FixL@ps #1}
+\DeclareCaptionLabelFormat{latvian}{#2\FixL@p\space #1}
 \captionsetup{labelformat=latvian}
 \newcommand{\FixL@inpackage}[2]{%
   \AtBeginDocument{\@ifpackageloaded{#1}{#2}{}}}
