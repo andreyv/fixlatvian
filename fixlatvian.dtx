@@ -337,9 +337,10 @@
 % Pēc tam definē pašas komandas, izmantojot iepriekš izveidoto. Padara
 % iespējamu šo komandu izmantošanu <<kustīgajos parametros>>.\footnote{^^A
 % |\DeclareRobustCommand| nevar izmantot ar \pack{Hyperref} versijām, jo
-% |\csname ref \endcsname| un |\csname pageref \endcsname| identifikatorus
-% joprojām izmanto |\nref| un |\npageref| komandas. Toties |\robustify| no
-% \pack{etoolbox} pakotnes neprasa papildus komandu definēšanu.}
+% \Verb[showspaces=true]|ref | un \Verb[showspaces=true]|pageref |
+% identifikatorus joprojām izmanto |\nref| un |\npageref| komandas. Toties
+% |\robustify| no \pack{etoolbox} pakotnes neprasa papildus komandu
+% definēšanu.}
 %    \begin{macrocode}
 \AtBeginDocument{%
   \@ifpackageloaded{hyperref}{%
