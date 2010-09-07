@@ -121,10 +121,10 @@
 %
 % \section{Lietošana}
 % \subsection{Pakotnes pieslēgšana}
-% Pakotni pieslēdz ar |\usepackage{fixlatvian}| komandu. Tās ielādes laikā
-% tiek pieslēgta arī \pack{Polyglossia} pakotne, kā arī dokumenta valoda
-% tiek uzstādīta uz |latvian|. \pack{FixLatvian} pakotne būtu jāpieslēdz
-% pēc \pack{Hyperref} pakotnes, ja tāda tiek izmantota.
+% Pakotni pieslēdz ar |\usepackage{fixlatvian}| komandu. Tās ielādes laikā tiek
+% pieslēgta arī \pack{Polyglossia} pakotne, kā arī dokumenta valoda tiek
+% uzstādīta uz |latvian|. \pack{FixLatvian} pakotne būtu jāpieslēdz pēc
+% \pack{Hyperref} pakotnes, ja tāda tiek izmantota.
 %
 % \subsection{Numerācija ar punktiem}
 % \label{sec:numbering}
@@ -133,15 +133,14 @@
 % Pēc automātiski izveidotajiem numuriem (nodaļas, sekcijas, attēli, utt.)\
 % tiek likti punkti (piem., <<\ref{sec:numbering} apakšnodaļa>>). Tie parādās
 % virsrakstu numerācijā, saturā un citos sarakstos, kā arī lietojot ierastās
-% |\ref| un |\pageref| komandas. Saturā punkts netiek likts, ja numurs
-% beidzas ne ar ciparu vai burtu (piem., <<\mbox{(a)\quad Kāda attēla
-% apakšattēls>>}).
+% |\ref| un |\pageref| komandas. Saturā punkts netiek likts, ja numurs beidzas
+% ne ar ciparu vai burtu (piem., <<\mbox{(a)\quad Kāda attēla apakšattēls>>}).
 %
 % \DescribeMacro{\nref}
 % \DescribeMacro{\npageref}
 % Dažreiz ir nepieciešams izmantot numuru bez tam sekojošā punkta, piem.,
-% <<apakšnodaļa~\nref{sec:numbering}>>. Šim gadījumam ir paredzētas |\nref|
-% un |\npageref| komandas, kuru lietošanas sintakse ir līdzīga |\ref| un
+% <<apakšnodaļa~\nref{sec:numbering}>>. Šim gadījumam ir paredzētas |\nref| un
+% |\npageref| komandas, kuru lietošanas sintakse ir līdzīga |\ref| un
 % |\pageref| komandām:
 % \begin{example}
 %   |\nref|\optstar\marg{iezīme}\\
@@ -151,16 +150,16 @@
 % \subsection{Daļu un nodaļu virsraksti}
 % \DescribeMacro{\part}
 % \DescribeMacro{\chapter}
-% Standarta \LaTeX{} dokumentu klašu daļu un nodaļu virsrakstos numurs tagad
-% ir pirms vārda, nevis pēc (piem., <<1.~nodaļa>>). Izņēmums ir pielikumu
+% Standarta \LaTeX{} dokumentu klašu daļu un nodaļu virsrakstos numurs tagad ir
+% pirms vārda, nevis pēc (piem., <<1.~nodaļa>>). Izņēmums ir pielikumu
 % virsraksts, kas saglabā veco kārtību (<<Pielikums~A>>). Daļas tiek numurētas
 % ar arābu cipariem.
 %
 % \subsection{Nosaukumu tulkojumi}
 % \pack{FixLatvian} pakotne satur vairāku nosaukumu un tekstu tulkojumus
-% papildus tam, ko jau piedāvā \pack{Polyglossia} pakotne. Tulkojamo
-% tekstu saraksts satur gan dažas \LaTeX{} komandas, gan vairāku citu pakotņu
-% komandas (sk.~\ref{sec:packsupport} nodaļu).
+% papildus tam, ko jau piedāvā \pack{Polyglossia} pakotne. Tulkojamo tekstu
+% saraksts satur gan dažas \LaTeX{} komandas, gan vairāku citu pakotņu komandas
+% (sk.~\ref{sec:packsupport} nodaļu).
 %
 % \DescribeMacro{\alph}
 % \DescribeMacro{\Alph}
@@ -170,9 +169,9 @@
 %
 % \subsection{Tipografiskās īpatnības}
 % \subsubsection{Atstarpes starp vārdiem}
-% Pēc noklusējuma tiek uzstādīts vienāds atstarpju garums pēc visiem
-% simboliem. Lai pēc pieturzīmēm tiktu liktas lielākas atstarpes, kā pieņemts
-% angļu valodā, pakotnei jāpadod parametrs |nonfrenchspacing|:
+% Pēc noklusējuma tiek uzstādīts vienāds atstarpju garums pēc visiem simboliem.
+% Lai pēc pieturzīmēm tiktu liktas lielākas atstarpes, kā pieņemts angļu
+% valodā, pakotnei jāpadod parametrs |nonfrenchspacing|:
 % \begin{example}
 %   |\usepackage[nonfrenchspacing]{fixlatvian}|
 % \end{example}
@@ -363,10 +362,10 @@
 %
 % \subsection{Daļu un nodaļu virsraksti}
 % \begin{macro}{\@makechapterhead}
-% Izmaina nodaļu virsrakstu vārdu secību no <<Nodaļa~1>> uz <<1.~nodaļa>>
-% (bet atstāj <<Pielikums~A>>). Ja <<|\@chapapp\space \thechapter|>> virkne
-% nav atrodama |\@makechapterhead| komandā, pieņem, ka lietotājs izveidojis
-% savu variantu, un neko nedara.
+% Izmaina nodaļu virsrakstu vārdu secību no <<Nodaļa~1>> uz <<1.~nodaļa>> (bet
+% atstāj <<Pielikums~A>>). Ja <<|\@chapapp\space \thechapter|>> virkne nav
+% atrodama |\@makechapterhead| komandā, pieņem, ka lietotājs izveidojis savu
+% variantu, un neko nedara.
 % ^^A XXX To Madars: when you will be adding Memoir support, add only a
 % ^^A \@ifclassloaded check here and do the real work in a new subsubsection
 % ^^A of subsection 3.7.
