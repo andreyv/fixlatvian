@@ -181,6 +181,8 @@
 % \DescribeMacro{\footnote}
 % Zemteksta piezīmju numerācija tagad sākas no jauna katru lappusi.
 %
+% Komatu tagad var izmantot kā skaitļu decimāldaļas atdalītāju.
+%
 % \section{Citu pakotņu atbalsts}
 % \label{sec:packsupport}
 % Šī pakotne ir savietojama ar
@@ -213,6 +215,11 @@
 % Pieņem, ka pirmajām rindkopām ir atkāpes.
 %    \begin{macrocode}
 \RequirePackage{indentfirst}
+%    \end{macrocode}
+%
+% Atļauj lietot komatu kā decimāldaļas atdalītāju.
+%    \begin{macrocode}
+\RequirePackage{icomma}
 %    \end{macrocode}
 %
 % Uzstāda latviešu valodu kā dokumenta valodu.
