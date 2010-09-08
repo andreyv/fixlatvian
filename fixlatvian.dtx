@@ -203,17 +203,21 @@
 % \subsection{Sagatavošanās darbam}
 % Sākumā ielādē citas pakotnes, kas nepieciešamas darbam.
 %    \begin{macrocode}
-\RequirePackage{polyglossia}
-\@ifundefined{latvian@loaded}{\setdefaultlanguage{latvian}}{}
-\RequirePackage{xstring}
+\RequirePackage{caption}
 \RequirePackage{etoolbox}
 \RequirePackage{perpage}
-\RequirePackage{caption}
+\RequirePackage{polyglossia}
+\RequirePackage{xstring}
 %    \end{macrocode}
 %
 % Pieņem, ka pirmajām rindkopām ir atkāpes.
 %    \begin{macrocode}
 \RequirePackage{indentfirst}
+%    \end{macrocode}
+%
+% Uzstāda latviešu valodu kā dokumenta valodu.
+%    \begin{macrocode}
+\@ifundefined{latvian@loaded}{\setdefaultlanguage{latvian}}{}
 %    \end{macrocode}
 %
 % Definē un apstrādā pakotnes parametrus.

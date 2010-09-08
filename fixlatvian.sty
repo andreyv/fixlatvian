@@ -22,13 +22,13 @@
 \NeedsTeXFormat{LaTeX2e}[2009/09/24]
 \ProvidesPackage{fixlatvian}
   [2010/07/04 v1-dev Improved Latvian support]
-\RequirePackage{polyglossia}
-\@ifundefined{latvian@loaded}{\setdefaultlanguage{latvian}}{}
-\RequirePackage{xstring}
+\RequirePackage{caption}
 \RequirePackage{etoolbox}
 \RequirePackage{perpage}
-\RequirePackage{caption}
+\RequirePackage{polyglossia}
+\RequirePackage{xstring}
 \RequirePackage{indentfirst}
+\@ifundefined{latvian@loaded}{\setdefaultlanguage{latvian}}{}
 \DeclareOption{frenchspacing}{\frenchspacing}
 \DeclareOption{nonfrenchspacing}{\nonfrenchspacing}
 \ExecuteOptions{frenchspacing}
