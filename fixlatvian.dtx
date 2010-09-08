@@ -147,14 +147,6 @@
 %   |\npageref|\optstar\marg{iezīme}
 % \end{example}
 %
-% \subsection{Daļu un nodaļu virsraksti}
-% \DescribeMacro{\part}
-% \DescribeMacro{\chapter}
-% Standarta \LaTeX{} dokumentu klašu daļu un nodaļu virsrakstos numurs tagad ir
-% pirms vārda, nevis pēc (piem., <<1.~nodaļa>>). Izņēmums ir pielikumu
-% virsraksts, kas saglabā veco kārtību (<<Pielikums~A>>). Daļas tiek numurētas
-% ar arābu cipariem.
-%
 % \subsection{Nosaukumu tulkojumi}
 % \pack{FixLatvian} pakotne satur vairāku nosaukumu un tekstu tulkojumus
 % papildus tam, ko jau piedāvā \pack{Polyglossia} pakotne. Tulkojamo tekstu
@@ -167,6 +159,17 @@
 % tagad izvada tikai latviešu alfabētā esošos, izņemot burtus ar diakritiskajām
 % zīmēm.
 %
+% \subsection{Virsrakstu pielāgojumi}
+% \DescribeMacro{\part}
+% \DescribeMacro{\chapter}
+% Standarta \LaTeX{} dokumentu klašu daļu un nodaļu virsrakstos numurs tagad ir
+% pirms vārda, nevis pēc (piem., <<1.~nodaļa>>). Izņēmums ir pielikumu
+% virsraksts, kas saglabā veco kārtību (<<Pielikums~A>>). Daļas tiek numurētas
+% ar arābu cipariem.
+%
+% \DescribeMacro{\caption}
+% Attēlu un tabulu virsraksti tagad ir formā <<1.~att.~Nosaukums>>.
+%
 % \subsection{Tipografiskās īpatnības}
 % Pēc noklusējuma tiek uzstādīts vienāds atstarpju garums pēc visiem simboliem.
 % Lai pēc pieturzīmēm tiktu liktas lielākas atstarpes, kā pieņemts angļu
@@ -177,9 +180,6 @@
 %
 % \DescribeMacro{\footnote}
 % Zemteksta piezīmju numerācija tagad sākas no jauna katru lappusi.
-%
-% \DescribeMacro{\caption}
-% Attēlu un tabulu virsraksti tagad ir formā <<1.~att.~Nosaukums>>.
 %
 % \section{Citu pakotņu atbalsts}
 % \label{sec:packsupport}
@@ -358,7 +358,52 @@
 % \end{macro}
 % \end{macro}
 %
-% \subsection{Daļu un nodaļu virsraksti}
+% \subsection{Nosaukumu tulkojumi}
+% \begin{macro}{\alsoname}
+% \begin{macro}{\chaptername}
+% \begin{macro}{\figurename}
+% \begin{macro}{\indexname}
+% \begin{macro}{\partname}
+% \begin{macro}{\tablename}
+% \begin{macro}{\seename}
+% Pielāgo dažus \LaTeX{} nosaukumus.
+%    \begin{macrocode}
+\gappto\captionslatvian{%
+  \renewcommand{\alsoname}{sk.~arī}%
+  \renewcommand{\chaptername}{nodaļa}%
+  \renewcommand{\figurename}{att}%
+  \renewcommand{\indexname}{Rādītājs}%
+  \renewcommand{\partname}{daļa}%
+  \renewcommand{\tablename}{tabula}%
+  \renewcommand{\seename}{sk.\@\nobreak}%
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \subsubsection{Numerācija ar latviešu burtiem}
+% \begin{macro}{\@alph}
+% \begin{macro}{\@Alph}
+% Izmaina |\@alph| un |\@Alph| komandu definīcijas, lai tās saturētu tikai
+% latviešu alfabēta burtus bez diakritiskajām zīmēm.
+%    \begin{macrocode}
+\renewcommand{\@alph}[1]{%
+  \ifcase #1\or a\or b\or c\or d\or e\or f\or g\or h\or i\or j\or k\or l%
+  \or m\or n\or o\or p\or r\or s\or t\or u\or v\or z\else\@ctrerr\fi}
+\renewcommand{\@Alph}[1]{%
+  \ifcase #1\or A\or B\or C\or D\or E\or F\or G\or H\or I\or J\or K\or L%
+  \or M\or N\or O\or P\or R\or S\or T\or U\or V\or Z\else\@ctrerr\fi}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \subsection{Virsrakstu pielāgojumi}
+% \subsubsection{Daļu un nodaļu virsraksti}
 % \begin{macro}{\@makechapterhead}
 % Izmaina nodaļu virsrakstu vārdu secību no <<Nodaļa~1>> uz <<1.~nodaļa>> (bet
 % atstāj <<Pielikums~A>>). Ja <<|\@chapapp\space \thechapter|>> virkne nav
@@ -407,57 +452,7 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \subsection{Nosaukumu tulkojumi}
-% \begin{macro}{\alsoname}
-% \begin{macro}{\chaptername}
-% \begin{macro}{\figurename}
-% \begin{macro}{\indexname}
-% \begin{macro}{\partname}
-% \begin{macro}{\tablename}
-% \begin{macro}{\seename}
-% Pielāgo dažus \LaTeX{} nosaukumus.
-%    \begin{macrocode}
-\gappto\captionslatvian{%
-  \renewcommand{\alsoname}{sk.~arī}%
-  \renewcommand{\chaptername}{nodaļa}%
-  \renewcommand{\figurename}{att}%
-  \renewcommand{\indexname}{Rādītājs}%
-  \renewcommand{\partname}{daļa}%
-  \renewcommand{\tablename}{tabula}%
-  \renewcommand{\seename}{sk.\@\nobreak}%
-}
-%    \end{macrocode}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-%
-% \subsubsection{Numerācija ar latviešu burtiem}
-% \begin{macro}{\@alph}
-% \begin{macro}{\@Alph}
-% Izmaina |\@alph| un |\@Alph| komandu definīcijas, lai tās saturētu tikai
-% latviešu alfabēta burtus bez diakritiskajām zīmēm.
-%    \begin{macrocode}
-\renewcommand{\@alph}[1]{%
-  \ifcase #1\or a\or b\or c\or d\or e\or f\or g\or h\or i\or j\or k\or l%
-  \or m\or n\or o\or p\or r\or s\or t\or u\or v\or z\else\@ctrerr\fi}
-\renewcommand{\@Alph}[1]{%
-  \ifcase #1\or A\or B\or C\or D\or E\or F\or G\or H\or I\or J\or K\or L%
-  \or M\or N\or O\or P\or R\or S\or T\or U\or V\or Z\else\@ctrerr\fi}
-%    \end{macrocode}
-% \end{macro}
-% \end{macro}
-%
-% \subsection{Zemteksta piezīmes}
-% Sāk zemteksta piezīmju numerāciju no jauna katru lappusi.
-%    \begin{macrocode}
-\MakePerPage{footnote}
-%    \end{macrocode}
-%
-% \subsection{Attēlu un tabulu virsraksti}
+% \subsubsection{Attēlu un tabulu virsraksti}
 % Izmaina virsraksta pirmās daļas atdalītāju.
 %    \begin{macrocode}
 \DeclareCaptionLabelSeparator{period@}{.\@\space}
@@ -468,6 +463,12 @@
 %    \begin{macrocode}
 \DeclareCaptionLabelFormat{latvian}{#2\FixL@p\space #1}
 \captionsetup{labelformat=latvian}
+%    \end{macrocode}
+%
+% \subsection{Zemteksta piezīmes}
+% Sāk zemteksta piezīmju numerāciju no jauna katru lappusi.
+%    \begin{macrocode}
+\MakePerPage{footnote}
 %    \end{macrocode}
 %
 % \subsection{Citu pakotņu atbalsts}
