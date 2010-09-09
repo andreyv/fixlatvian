@@ -1,4 +1,12 @@
 ###############################################################################
+#
+# Makefile to build the package and documentation
+#
+# Requires GNU Make.
+#
+# Copyright (C) Andrey Vihrov <andrey.vihrov@gmail.com>, 2010
+# Copyright (C) Madars Virza <madars@gmail.com>, 2010
+#
 
 # Package name
 PACKAGE    = fixlatvian
@@ -8,6 +16,8 @@ LATEX     ?= xelatex -halt-on-error
 MAKEINDEX ?= makeindex
 
 ###############################################################################
+
+.DELETE_ON_ERROR:
 
 .PHONY: all clean clean-all
 
