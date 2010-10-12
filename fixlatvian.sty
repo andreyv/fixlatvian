@@ -38,17 +38,16 @@
 \newcommand{\FixL@warning@noline}[1]{%
   \PackageWarningNoLine{fixlatvian}{#1}}
 \newcommand{\FixL@info}[1]{\PackageInfo{fixlatvian}{#1}}
-\newif\ifFixL@hyperref@before
-\@ifpackageloaded{hyperref}{\FixL@hyperref@beforetrue}{}
-\AtBeginDocument{%
-  \@ifpackageloaded{hyperref}{%
-    \ifFixL@hyperref@before
-    \else
-      \FixL@warning@noline{%
-        This package should be loaded after hyperref%
-      }%
-    \fi
-  }{}}
+\newcommand{\FixL@checkbefore}[1]{
+  \expandafter\newif\csname ifFixL@#1@before\endcsname
+  \@ifpackageloaded{#1}{\csname FixL@#1@beforetrue\endcsname}{}
+  \AtBeginDocument{%
+    \@ifpackageloaded{#1}{%
+      \csname ifFixL@#1@before\endcsname\else
+        \FixL@warning@noline{This package should be loaded after #1}%
+      \fi
+    }{}}}
+\FixL@checkbefore{hyperref}
 \newcommand{\FixL@alnum}{%
   ABCDEFGHIJKLMNOPQRSTUVWXYZ%
   abcdefghijklmnopqrstuvwxyz%
