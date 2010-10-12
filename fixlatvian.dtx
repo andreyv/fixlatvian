@@ -420,9 +420,6 @@
 % atstāj <<Pielikums~A>>). Ja <<|\@chapapp\space \thechapter|>> virkne nav
 % atrodama |\@makechapterhead| komandā, pieņem, ka lietotājs izveidojis savu
 % variantu, un neko nedara.
-% ^^A XXX To Madars: when you will be adding Memoir support, add only a
-% ^^A \@ifclassloaded check here and do the real work in a new subsubsection
-% ^^A of subsection 3.7.
 %    \begin{macrocode}
 \@ifundefined{@makechapterhead}{}{%
   \patchcmd{\@makechapterhead}{%
