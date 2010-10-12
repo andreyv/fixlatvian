@@ -422,17 +422,11 @@
 % variantu, un neko nedara.
 %    \begin{macrocode}
 \@ifundefined{@makechapterhead}{}{%
-  \patchcmd{\@makechapterhead}{%
-    \@chapapp\space \thechapter
-  }{%
-    \IfStrEq{\@chapapp}{\appendixname}{%
-      \@chapapp\space\thechapter
-    }{%
-      \thechapter\FixL@p\space\@chapapp
-    }%
-  }{}{%
-    \FixL@patchfailed{\chapter}%
-  }}
+  \patchcmd{\@makechapterhead}{\@chapapp\space \thechapter}{%
+    \IfStrEq{\@chapapp}{\appendixname}{\@chapapp\space\thechapter}{%
+      \thechapter\FixL@p\space\@chapapp}%
+  }{}{\FixL@patchfailed{\chapter}}%
+}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -444,19 +438,11 @@
   \@ifundefined{#1}{}{%
     \renewcommand{\thepart}{\arabic{part}}%
     \expandafter\patchcmd\csname #1\endcsname{%
-      \partname\nobreakspace\thepart
-    }{%
-      \thepart\FixL@p\space\partname
-    }{}{%
-      \FixL@patchfailed{\part}%
-    }%
+      \partname\nobreakspace\thepart}{\thepart\FixL@p\space\partname}{}{%
+      \FixL@patchfailed{\part}}%
   }}
-\AtBeginDocument{%
-  \@ifpackageloaded{hyperref}{%
-    \FixL@fix@part{H@old@part}%
-  }{%
-    \FixL@fix@part{@part}%
-  }}
+\AtBeginDocument{\FixL@fix@part{
+  \@ifpackageloaded{hyperref}{H@old@part}{@part}}}
 %    \end{macrocode}
 % \end{macro}
 %

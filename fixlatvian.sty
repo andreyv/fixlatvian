@@ -108,34 +108,20 @@
   \ifcase #1\or A\or B\or C\or D\or E\or F\or G\or H\or I\or J\or K\or L%
   \or M\or N\or O\or P\or R\or S\or T\or U\or V\or Z\else\@ctrerr\fi}
 \@ifundefined{@makechapterhead}{}{%
-  \patchcmd{\@makechapterhead}{%
-    \@chapapp\space \thechapter
-  }{%
-    \IfStrEq{\@chapapp}{\appendixname}{%
-      \@chapapp\space\thechapter
-    }{%
-      \thechapter\FixL@p\space\@chapapp
-    }%
-  }{}{%
-    \FixL@patchfailed{\chapter}%
-  }}
+  \patchcmd{\@makechapterhead}{\@chapapp\space \thechapter}{%
+    \IfStrEq{\@chapapp}{\appendixname}{\@chapapp\space\thechapter}{%
+      \thechapter\FixL@p\space\@chapapp}%
+  }{}{\FixL@patchfailed{\chapter}}%
+}
 \newcommand{\FixL@fix@part}[1]{%
   \@ifundefined{#1}{}{%
     \renewcommand{\thepart}{\arabic{part}}%
     \expandafter\patchcmd\csname #1\endcsname{%
-      \partname\nobreakspace\thepart
-    }{%
-      \thepart\FixL@p\space\partname
-    }{}{%
-      \FixL@patchfailed{\part}%
-    }%
+      \partname\nobreakspace\thepart}{\thepart\FixL@p\space\partname}{}{%
+      \FixL@patchfailed{\part}}%
   }}
-\AtBeginDocument{%
-  \@ifpackageloaded{hyperref}{%
-    \FixL@fix@part{H@old@part}%
-  }{%
-    \FixL@fix@part{@part}%
-  }}
+\AtBeginDocument{\FixL@fix@part{
+  \@ifpackageloaded{hyperref}{H@old@part}{@part}}}
 \DeclareCaptionLabelSeparator{period@}{.\@\space}
 \captionsetup{labelsep=period@}
 \DeclareCaptionLabelFormat{latvian}{#2\FixL@p\space #1}
