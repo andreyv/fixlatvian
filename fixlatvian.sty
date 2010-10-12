@@ -55,6 +55,7 @@
       \fi
     }{}}}
 \FixL@checkbefore{hyperref}
+\FixL@checkbefore{amsthm}
 \newcommand{\FixL@p}{.\@\nobreak}
 \CheckCommand*{\@seccntformat}[1]{\csname the#1\endcsname\quad}
 \renewcommand{\@seccntformat}[1]{%
@@ -125,6 +126,19 @@
 \captionsetup{labelsep=period@}
 \DeclareCaptionLabelFormat{latvian}{#2\FixL@p\space #1}
 \captionsetup{labelformat=latvian}
+\newif\ifFixL@amsthm@loaded
+\@ifpackageloaded{amsthm}{\FixL@amsthm@loadedtrue}{}
+\ifFixL@amsthm@loaded
+  \swapnumbers
+  \newcommand{\FixL@thmnumber}[1]{\@ifempty{#1}{}{#1\FixL@p}}%
+  \patchcmd{\swappedhead}{\thmnumber}{\FixL@thmnumber}{}{%
+    \FixL@patchfailed{\swappedhead}}
+\else
+  \patchcmd{\@begintheorem}{#1\ #2}{#2\FixL@p\space #1}{}{%
+    \FixL@patchfailed{\@begintheorem}}
+  \patchcmd{\@opargbegintheorem}{#1\ #2}{#2\FixL@p\space #1}{}{%
+    \FixL@patchfailed{\@opargbegintheorem}}
+\fi
 \MakePerPage{footnote}
 \newcommand{\FixL@inpackage}[2]{%
   \AtBeginDocument{\@ifpackageloaded{#1}{#2}{}}}
@@ -134,6 +148,7 @@
   }}
 \FixL@translate{algorithm}{listalgorithmname}{Algoritmu saraksts}
 \FixL@inpackage{algorithm}{\floatname{algorithm}{Algoritms}}
+\FixL@translate{amsthm}{proofname}{Pierādījums}
 \FixL@translate{appendix}{appendixtocname}{Pielikumi}
 \newcommand{\FixL@doc@glossaryname}{Izmaiņu saraksts}
 \FixL@inpackage{doc}{\GlossaryPrologue{%

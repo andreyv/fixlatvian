@@ -99,7 +99,9 @@
 %   \@,\nobreak,\relax,\ProcessOptions,\floatname,\robustify,\DeclareOption,
 %   \frenchspacing,\nonfrenchspacing,\ExecuteOptions,\ifcase,\or,\@ctrerr,
 %   \MakePerPage,\@empty,\lst@@caption,\ifx,\thelstlisting,\appendixname,
-%   \DeclareCaptionLabelFormat,\DeclareCaptionLabelSeparator,\captionsetup}
+%   \DeclareCaptionLabelFormat,\DeclareCaptionLabelSeparator,\captionsetup,
+%   \swapnumbers,\ifFixL@amsthm@loaded,\FixL@amsthm@loadedtrue,\thmnumber,
+%   \@ifempty,\FixL@thmnumber}
 %
 %
 % \title{\pack{FixLatvian} pakotne\thanks{Versija~\fileversion{} (\filedate).}}
@@ -131,7 +133,7 @@
 % Pakotni pieslēdz ar |\usepackage{fixlatvian}| komandu. Tās ielādes laikā tiek
 % pieslēgta arī \pack{Polyglossia} pakotne, kā arī dokumenta valoda tiek
 % uzstādīta uz |latvian|. \pack{FixLatvian} pakotne būtu jāpieslēdz pēc
-% \pack{Hyperref} pakotnes, ja tāda tiek izmantota.
+% \pack{Hyperref} vai \pack{amsthm} pakotnēm, ja tādas tiek izmantotas.
 %
 % \subsection{Numerācija ar punktiem}
 % \label{sec:numbering}
@@ -175,7 +177,9 @@
 % ar arābu cipariem.
 %
 % \DescribeMacro{\caption}
-% Attēlu un tabulu virsraksti tagad ir formā <<1.~att.~Nosaukums>>.
+% \DescribeMacro{\newtheorem}
+% Tiek mainīti arī attēlu un tabulu (<<1.~att.~Nosaukums>>) un teorēmu tipa
+% bloku virsraksti.
 %
 % \subsection{Tipografiskās īpatnības}
 % Pēc noklusējuma tiek uzstādīts vienāds atstarpju garums pēc visiem simboliem.
@@ -194,6 +198,7 @@
 % \label{sec:packsupport}
 % Šī pakotne ir savietojama ar
 %   \pack{Algorithms},
+%   \pack{amsthm},
 %   \pack{Appendix},
 %   \pack{Caption},
 %   \pack{Doc},
@@ -282,9 +287,11 @@
 % \end{macro}
 % \end{macro}
 %
-% Pārbauda, ka \pack{Hyperref} pakotne nav tikusi ielādēta \emph{pēc} šīs.
+% Pārbauda, ka \pack{Hyperref} un \pack{amsthm} pakotnes nav tikušas ielādētas
+% \emph{pēc} šīs.
 %    \begin{macrocode}
 \FixL@checkbefore{hyperref}
+\FixL@checkbefore{amsthm}
 %    \end{macrocode}
 %
 % \subsection{Numerācija ar punktiem}
@@ -467,6 +474,32 @@
 \captionsetup{labelformat=latvian}
 %    \end{macrocode}
 %
+% \subsubsection{Teorēmu virsraksti}
+% \begin{macro}{\swappedhead}
+% \begin{macro}{\@begintheorem}
+% \begin{macro}{\@opargbegintheorem}
+% Pielāgojot teorēmu virsrakstus, ņem vērā, vai ir ielādēta \pack{amsthm}
+% pakotne.
+% ^^A Can't easily use \patchcmd and # inside a macro argument
+%    \begin{macrocode}
+\newif\ifFixL@amsthm@loaded
+\@ifpackageloaded{amsthm}{\FixL@amsthm@loadedtrue}{}
+\ifFixL@amsthm@loaded
+  \swapnumbers
+  \newcommand{\FixL@thmnumber}[1]{\@ifempty{#1}{}{#1\FixL@p}}%
+  \patchcmd{\swappedhead}{\thmnumber}{\FixL@thmnumber}{}{%
+    \FixL@patchfailed{\swappedhead}}
+\else
+  \patchcmd{\@begintheorem}{#1\ #2}{#2\FixL@p\space #1}{}{%
+    \FixL@patchfailed{\@begintheorem}}
+  \patchcmd{\@opargbegintheorem}{#1\ #2}{#2\FixL@p\space #1}{}{%
+    \FixL@patchfailed{\@opargbegintheorem}}
+\fi
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
 % \subsection{Zemteksta piezīmes}
 % Sāk zemteksta piezīmju numerāciju no jauna katru lappusi.
 %    \begin{macrocode}
@@ -500,6 +533,14 @@
 %    \begin{macrocode}
 \FixL@inpackage{algorithm}{\floatname{algorithm}{Algoritms}}
 %    \end{macrocode}
+%
+% \subsubsection{Pakotnes \pack{amsthm} atbalsts}
+% \begin{macro}{\proofname}
+% Izmaina pierādījumu noklusēto nosaukumu.
+%    \begin{macrocode}
+\FixL@translate{amsthm}{proofname}{Pierādījums}
+%    \end{macrocode}
+% \end{macro}
 %
 % \subsubsection{Pakotnes \pack{Appendix} atbalsts}
 % \begin{macro}{\appendixtocname}
