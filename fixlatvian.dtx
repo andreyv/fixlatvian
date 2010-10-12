@@ -256,22 +256,9 @@
 % \end{macro}
 % \end{macro}
 %
-% Pārbauda, ka \pack{Hyperref} pakotne nav tikusi ielādēta \emph{pēc} šīs.
-%    \begin{macrocode}
-\newcommand{\FixL@checkbefore}[1]{
-  \expandafter\newif\csname ifFixL@#1@before\endcsname
-  \@ifpackageloaded{#1}{\csname FixL@#1@beforetrue\endcsname}{}
-  \AtBeginDocument{%
-    \@ifpackageloaded{#1}{%
-      \csname ifFixL@#1@before\endcsname\else
-        \FixL@warning@noline{This package should be loaded after #1}%
-      \fi
-    }{}}}
-\FixL@checkbefore{hyperref}
-%    \end{macrocode}
-%
 % \begin{macro}{\FixL@alnum}
 % \begin{macro}{\FixL@patchfailed}
+% \begin{macro}{\FixL@checkbefore}
 % Definē arī palīgkomandas.
 %    \begin{macrocode}
 \newcommand{\FixL@alnum}{%
@@ -281,9 +268,24 @@
 }
 \newcommand{\FixL@patchfailed}[1]{%
   \FixL@info{Could not change the definition of the \protect #1 command}}
+\newcommand{\FixL@checkbefore}[1]{
+  \expandafter\newif\csname ifFixL@#1@before\endcsname
+  \@ifpackageloaded{#1}{\csname FixL@#1@beforetrue\endcsname}{}
+  \AtBeginDocument{%
+    \@ifpackageloaded{#1}{%
+      \csname ifFixL@#1@before\endcsname\else
+        \FixL@warning@noline{This package should be loaded after #1}%
+      \fi
+    }{}}}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
+% \end{macro}
+%
+% Pārbauda, ka \pack{Hyperref} pakotne nav tikusi ielādēta \emph{pēc} šīs.
+%    \begin{macrocode}
+\FixL@checkbefore{hyperref}
+%    \end{macrocode}
 %
 % \subsection{Numerācija ar punktiem}
 %
