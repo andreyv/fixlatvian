@@ -196,7 +196,15 @@
 % kā arī izmantot tiešsaistē pieejamo problēmu izsekošanas sistēmu:
 % \url{http://code.google.com/p/fixlatvian/issues/}.
 %
-% \StopEventually{}
+% \renewcommand{\refname}{Atsauces}
+% \StopEventually{
+%   \begin{thebibliography}{9}
+%     \bibitem{deccomma}
+%       \url{http://www.tex.ac.uk/cgi-bin/texfaq2html?label=dec_comma}
+%     \bibitem{fnpp}
+%       \url{http://www.tex.ac.uk/cgi-bin/texfaq2html?label=footnpp}
+%   \end{thebibliography}
+% }
 %
 % \section{Realizācija}
 % \subsection{Sagatavošanās darbam}
@@ -214,7 +222,7 @@
 \RequirePackage{indentfirst}
 %    \end{macrocode}
 %
-% Atļauj lietot komatu kā decimāldaļas atdalītāju.
+% Atļauj lietot komatu kā decimāldaļas atdalītāju \cite{deccomma}.
 %    \begin{macrocode}
 \RequirePackage{icomma}
 %    \end{macrocode}
@@ -486,7 +494,7 @@
 % \end{macro}
 %
 % \subsection{Zemteksta piezīmes}
-% Sāk zemteksta piezīmju numerāciju no jauna katru lappusi.
+% Sāk zemteksta piezīmju numerāciju no jauna katru lappusi \cite{fnpp}.
 %    \begin{macrocode}
 \MakePerPage{footnote}
 %    \end{macrocode}
