@@ -97,8 +97,8 @@
 %
 % \renewcommand{\abstractname}{Pateicības}
 % \begin{abstract}
-%   Šī pakotne savā darbā izmanto \pack{Caption}, \pack{etoolbox},
-%   \pack{perpage}, \pack{Polyglossia}, \pack{xstring}, \pack{indentfirst} un
+%   Šī pakotne savā darbā izmanto \pack{caption}, \pack{etoolbox},
+%   \pack{perpage}, \pack{polyglossia}, \pack{xstring}, \pack{indentfirst} un
 %   \pack{icomma} pakotnes.
 % \end{abstract}
 %
@@ -116,9 +116,9 @@
 % \section{Lietošana}
 % \subsection{Pakotnes pieslēgšana}
 % Pakotni pieslēdz ar |\usepackage{fixlatvian}| komandu. Tās ielādes laikā tiek
-% pieslēgta arī \pack{Polyglossia} pakotne, kā arī dokumenta valoda tiek
+% pieslēgta arī \pack{polyglossia} pakotne, kā arī dokumenta valoda tiek
 % uzstādīta uz |latvian|. \pack{FixLatvian} pakotne būtu jāpieslēdz pēc
-% \pack{Hyperref} vai \pack{amsthm} pakotnēm, ja tādas tiek izmantotas.
+% \pack{hyperref} vai \pack{amsthm} pakotnēm, ja tādas tiek izmantotas.
 %
 % \subsection{Numerācija ar punktiem}
 % \label{sec:numbering}
@@ -143,7 +143,7 @@
 %
 % \subsection{Nosaukumu tulkojumi}
 % \pack{FixLatvian} pakotne satur vairāku nosaukumu un tekstu tulkojumus
-% papildus tam, ko jau piedāvā \pack{Polyglossia} pakotne. Tulkojamo tekstu
+% papildus tam, ko jau piedāvā \pack{polyglossia} pakotne. Tulkojamo tekstu
 % saraksts satur gan dažas \LaTeX{} komandas, gan vairāku citu pakotņu komandas
 % (sk.~\ref{sec:packsupport} nodaļu).
 %
@@ -182,13 +182,13 @@
 % \section{Citu pakotņu atbalsts}
 % \label{sec:packsupport}
 % Šī pakotne ir savietojama ar
-%   \pack{Algorithms},
+%   \pack{algorithms},
 %   \pack{amsthm},
-%   \pack{Appendix},
-%   \pack{Caption},
-%   \pack{Doc},
-%   \pack{Hyperref},
-%   \pack{Listings}
+%   \pack{appendix},
+%   \pack{caption},
+%   \pack{doc},
+%   \pack{hyperref},
+%   \pack{listings}
 % pakotnēm.
 %
 % \section{Kļūdu ziņošana}
@@ -272,7 +272,7 @@
 % \end{macro}
 % \end{macro}
 %
-% Pārbauda, ka \pack{Hyperref} un \pack{amsthm} pakotnes nav tikušas ielādētas
+% Pārbauda, ka \pack{hyperref} un \pack{amsthm} pakotnes nav tikušas ielādētas
 % \emph{pēc} šīs.
 %    \begin{macrocode}
 \FixL@checkbefore{hyperref}
@@ -317,7 +317,7 @@
 % \begin{macro}{\nref}
 % \begin{macro}{\npageref}
 % Saglabā vecas |\ref| un |\pageref| versijas |\nref| un |\npageref| komandās.
-% \pack{Hyperref} pakotne pārdefinē šīs komandas |\begin{document}| izpildes
+% \pack{hyperref} pakotne pārdefinē šīs komandas |\begin{document}| izpildes
 % laikā, tāpēc \pack{FixLatvian} pakotnes definīcijas jāievieš pēc tam.
 %    \begin{macrocode}
 \AtBeginDocument{%
@@ -344,7 +344,7 @@
 %
 % Pēc tam definē pašas komandas, izmantojot iepriekš izveidoto. Padara
 % iespējamu šo komandu izmantošanu <<kustīgajos parametros>>.\footnote{^^A
-% |\DeclareRobustCommand| nevar izmantot ar \pack{Hyperref} versijām, jo
+% |\DeclareRobustCommand| nevar izmantot ar \pack{hyperref} versijām, jo
 % \Verb[showspaces=true]|ref | un \Verb[showspaces=true]|pageref |
 % identifikatorus joprojām izmanto |\nref| un |\npageref| komandas. Toties
 % |\robustify| no \pack{etoolbox} pakotnes neprasa papildus komandu
@@ -431,7 +431,7 @@
 % \end{macro}
 %
 % \begin{macro}{\@part}
-% To pašu dara arī ar daļu virsrakstiem. \pack{Hyperref} pakotne izveido savu
+% To pašu dara arī ar daļu virsrakstiem. \pack{hyperref} pakotne izveido savu
 % |\part| definīciju, tāpēc šis gadījums arī jāņem vērā.
 %    \begin{macrocode}
 \newcommand{\FixL@fix@part}[1]{%
@@ -506,7 +506,7 @@
 % \end{macro}
 % \end{macro}
 %
-% \subsubsection{Pakotnes \pack{Algorithms} atbalsts}
+% \subsubsection{Pakotnes \pack{algorithms} atbalsts}
 % \begin{macro}{\listalgorithmname}
 % Izmaina algoritmu saraksta nosaukumu.
 %    \begin{macrocode}
@@ -527,7 +527,7 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \subsubsection{Pakotnes \pack{Appendix} atbalsts}
+% \subsubsection{Pakotnes \pack{appendix} atbalsts}
 % \begin{macro}{\appendixtocname}
 % Izmaina pielikumu sadaļas virsrakstu saturā.
 %    \begin{macrocode}
@@ -535,7 +535,7 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \subsubsection{Pakotnes \pack{Doc} atbalsts}
+% \subsubsection{Pakotnes \pack{doc} atbalsts}
 % \begin{macro}{\GlossaryPrologue}
 % \begin{macro}{\IndexPrologue}
 % \begin{macro}{\generalname}
@@ -561,10 +561,10 @@
 % \end{macro}
 % \end{macro}
 %
-% Ir pieejama arī latviskota \MakeIndex{} stila datne \pack{Doc}
+% Ir pieejama arī latviskota \MakeIndex{} stila datne \pack{doc}
 % rādītāja izveidei.
 %
-% \subsubsection{Pakotnes \pack{Listings} atbalsts}
+% \subsubsection{Pakotnes \pack{listings} atbalsts}
 % \begin{macro}{\lstlistlistingname}
 % Izmaina pirmkoda tekstu saraksta nosaukumu.
 %    \begin{macrocode}
