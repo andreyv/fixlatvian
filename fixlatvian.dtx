@@ -33,6 +33,7 @@
 \usepackage{fixltx2e}
 \usepackage{metalogo}
 \usepackage[toc]{multitoc}
+\usepackage{paralist}
 \usepackage[hyperindex=false]{hyperref}
 \usepackage{fixlatvian}
 
@@ -105,13 +106,45 @@
 % \tableofcontents
 %
 % \section{Ievads}
-% Lai gan latviešu valodas atbalsts \LaTeX{} sistēmā tiek pastāvīgi
-% pilnveidots, dažādas lietas joprojām prasa manuālas izmaiņas. Šī pakotne ir
-% dažu šāda veida uzlabojumu apkopojums; tā ir izveidota ar mērķi atvieglot
-% latviešu \LaTeX{} lietotāja darbu.
+% \LaTeX{} sistēma sākumā bija domāta darbam ar dokumentiem angļu valodā, citu
+% valodu atbalstu ierobežojot galvenokārt ar iespēju ievadīt burtus ar
+% diakritiskajām zīmēm. Laika gaitā parādījās pilnīgāki risinājumi dokumentu
+% izveidei citās valodās; daudzi no tiem tika apkopoti \pack{babel} pakotnē~^^A
+% \cite{babel}. Šādi mēģinājumi tika veikti arī latviešu valodai~\cite{drikis},
+% tomēr netika iekļauti \textsc{ctan} arhīvā un \TeX{} distributīvos.
 %
-% Pakotne ir jālieto kopā ar \XeTeX{} dzini. \LaTeX{} formātu šajā gadījumā
-% parasti ielādē ar \texttt{xelatex} komandu.
+% Pēdējos gados ir parādījušies rīki, kas ievērojami atvieglo dažādu valodu
+% lietošanu \LaTeX{} sistēmā. Pirmkārt, tas ir \XeTeX{} dzinis~\cite{xetex},
+% kas strādā ar Unicode tekstu un liek aizmirst par ievada un fontu
+% kodējumiem. Otrkārt, \TeX{} pasaulei kļuvuši pieejami daudzi fonti, kas
+% satur plašu Unicode simbolu klāstu. Tādi ir, piemēram, Latin Modern~^^A
+% \cite{lm} un Computer Modern Unicode~\cite{cmu}. Šie jauninājumi atrisināja
+% daudzas tehniskas problēmas, ar kurām saskarās valodu atbalsta pakotņu
+% autori pirms tam~--- dažreiz pat labākā veidā.
+%
+% Valodas atbalstu var iedalīt sekojošajās galvenajās kategorijās:
+% \begin{inparaenum}[(a)]
+%   \item valodas simbolu ievada iespējamība;\label{cat:in}
+%   \item attiecīgo simbolu atbalsts fontos;\label{cat:fnt}
+%   \item vārdu pārnesumu likšana;\label{cat:hyp}
+%   \item nosaukumu tulkojumi;\label{cat:trans}
+%   \item valodas punktuācija un noformējums.\label{cat:sty}
+% \end{inparaenum}
+% Izmantojot \XeTeX{} kopā ar \pack{polyglossia} pakotni, kas ir mūsdienu
+% \pack{babel} aizvietojums~\cite{poly}, latviešu valodas gadījumā ir
+% iespējams tikt galā ar \nref{cat:in}--\nref{cat:trans} punktiem. Tomēr dažas
+% lietas, tādas kā automātiska numerācija ar punktiem un pareiza virsrakstu
+% forma, vēl joprojām prasa manuālas izmaiņas.
+%
+% \pack{FixLatvian} pakotne apkopo dažādus šāda veida uzlabojumus, kā arī
+% pielāgo vairākas pakotnes darbam ar latviešu valodu. Tās mērķis ir ļaut
+% izveidot dokumentus, kas atbilstu latviešu valodā pieņemtajam noformējumam
+% gan dokumenta struktūras, gan teksta līmenī. Lai lietotu šo pakotni,
+% dokuments ir jāapstrādā ar \texttt{xelatex} komandu.
+%
+% Patlaban lielā mērā tiek atbalstītas standarta \LaTeX{} dokumentu klases un
+% dažas pakotnes. Tiek laipni lūgtas idejas un ierosinājumi par citu dokumentu
+% klašu un pakotņu atbalsta pievienošanu.
 %
 % \section{Lietošana}
 % \subsection{Pakotnes pieslēgšana}
@@ -199,6 +232,15 @@
 % \renewcommand{\refname}{Atsauces}
 % \StopEventually{
 %   \begin{thebibliography}{9}
+%     \bibitem{babel}
+%       \url{http://ctan.org/tex-archive/help/Catalogue/entries/babel.html}
+%     \bibitem{drikis}
+%       \url{http://home.lu.lv/~drikis/LaTeX-Latviski/latex-latviski.html}
+%     \bibitem{xetex} \url{http://scripts.sil.org/xetex}
+%     \bibitem{lm} \url{http://gust.org.pl/projects/e-foundry/latin-modern/}
+%     \bibitem{cmu} \url{http://canopus.iacp.dvo.ru/~panov/cm-unicode/}
+%     \bibitem{poly}
+%       \url{http://ctan.org/tex-archive/help/Catalogue/entries/polyglossia.html}
 %     \bibitem{deccomma}
 %       \url{http://www.tex.ac.uk/cgi-bin/texfaq2html?label=dec_comma}
 %     \bibitem{fnpp}
@@ -222,7 +264,7 @@
 \RequirePackage{indentfirst}
 %    \end{macrocode}
 %
-% Atļauj lietot komatu kā decimāldaļas atdalītāju \cite{deccomma}.
+% Atļauj lietot komatu kā decimāldaļas atdalītāju~\cite{deccomma}.
 %    \begin{macrocode}
 \RequirePackage{icomma}
 %    \end{macrocode}
@@ -494,7 +536,7 @@
 % \end{macro}
 %
 % \subsection{Zemteksta piezīmes}
-% Sāk zemteksta piezīmju numerāciju no jauna katru lappusi \cite{fnpp}.
+% Sāk zemteksta piezīmju numerāciju no jauna katru lappusi~\cite{fnpp}.
 %    \begin{macrocode}
 \MakePerPage{footnote}
 %    \end{macrocode}
