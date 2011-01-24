@@ -22,9 +22,7 @@
 %</driver>
 %<package>\NeedsTeXFormat{LaTeX2e}
 %<package>\ProvidesPackage{fixlatvian}
-%<*package>
   [2010/07/04 v1-dev Improved Latvian support]
-%</package>
 %
 %<*driver>
 \documentclass[a4paper]{ltxdoc}
@@ -87,7 +85,7 @@
 %
 % ^^A \changes{v1}{2099/01/01}{Sākuma versija}
 %
-% \GetFileInfo{fixlatvian.dtx}
+% \GetFileInfo{fixlatvian.sty}
 %
 %
 % \title{\pack{FixLatvian} pakotne\thanks{Versija~\fileversion{} (\filedate).}}
@@ -252,6 +250,7 @@
 % \subsection{Sagatavošanās darbam}
 % Sākumā ielādē citas pakotnes, kas nepieciešamas darbam.
 %    \begin{macrocode}
+%<*package>
 \RequirePackage{caption}
 \RequirePackage{etoolbox}
 \RequirePackage{perpage}
@@ -627,6 +626,7 @@
 %    \begin{macrocode}
 \FixL@translate{listings}{lstlistingname}{%
   \ifx\lst@@caption\@empty P\else p\fi irmkods}
+%</package>
 %    \end{macrocode}
 % \end{macro}
 %
