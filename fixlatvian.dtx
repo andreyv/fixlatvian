@@ -17,12 +17,14 @@
 % \fi
 %
 % \iffalse
+\RequirePackage{svn-prov}
 %<*driver>
-\ProvidesFile{fixlatvian.dtx}
+\ProvidesFileSVN
 %</driver>
 %<package>\NeedsTeXFormat{LaTeX2e}
-%<package>\ProvidesPackage{fixlatvian}
-  [2010/07/04 v1-dev Improved Latvian support]
+%<package>\ProvidesPackageSVN
+  {$Id$}
+  [Improved Latvian support \revinfo]
 %
 %<*driver>
 \documentclass[a4paper]{ltxdoc}
@@ -85,10 +87,11 @@
 %
 % ^^A \changes{v1}{2099/01/01}{Sākuma versija}
 %
-% \GetFileInfo{fixlatvian.sty}
+% \GetFileInfoSVN{fixlatvian.sty}
 %
-%
-% \title{\pack{FixLatvian} pakotne\thanks{Versija~\fileversion{} (\filedate).}}
+% ^^A TODO As long as there is no stable version and the PDF is kept in SVN,
+% ^^A file info will lag one revision behind, so disable it for now
+% \title{\pack{FixLatvian} pakotne}^^A\thanks{Versija~\fileversion{} (\filedate).}}
 % \author{Andrejs Vihrovs \email{andrey.vihrov@gmail.com}
 %   \and Madars Virza \email{madars@gmail.com}}
 %
