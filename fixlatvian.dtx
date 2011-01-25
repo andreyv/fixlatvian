@@ -30,6 +30,7 @@
 %<*driver>
 \documentclass[a4paper]{ltxdoc}
 
+\usepackage{booktabs}
 \usepackage{fancyvrb}
 \usepackage{fixltx2e}
 \usepackage{metalogo}
@@ -217,6 +218,26 @@
 % Zemteksta piezīmju numerācija tagad sākas no jauna katru lappusi.
 %
 % Komatu tagad var izmantot kā skaitļu decimāldaļas atdalītāju.
+%
+% \section{Padomi darbā}
+% \subsection{Pēdiņas \texorpdfstring{\textenglish{Latin Modern}}{Latin Modern}
+%   fontā}
+% \pack{polyglossia} pakotne latviešu valodai pēc noklusējuma iestata
+% \textenglish{Latin Modern} fontu, kas satur visus vajadzīgos simbolus. Tas
+% arī piedāvā kombinācijas dažādu pēdiņu ievadam, tāpat kā ar simboliem
+% \texttt{---} var ievadīt domuzīmi. Šīs kombinācijas ir dotas \ref{tab:quot}
+% tabulā. Protams, visus šos simbolus var ievadīt arī tiešā veidā kā
+% \textenglish{Unicode} tekstu.
+%
+% \begin{table}[hb]
+%   \caption{Pēdiņas \textenglish{Latin Modern} fontā}\label{tab:quot}
+%   \centering
+%   \begin{tabular}{cc}
+%     Ievads               & Rezultāts   \\\midrule
+%     \texttt{<<Piemērs>>} & <<Piemērs>> \\
+%     \texttt{,,Piemērs``} & ,,Piemērs``
+%   \end{tabular}
+% \end{table}
 %
 % \section{Citu pakotņu atbalsts}
 % \label{sec:packsupport}
