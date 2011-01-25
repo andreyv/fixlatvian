@@ -35,9 +35,12 @@
 \usepackage{metalogo}
 \usepackage[toc]{multitoc}
 \usepackage{paralist}
+\usepackage{polyglossia}
 \usepackage[hyperindex=false]{hyperref}
 \usepackage{fixlatvian}
 
+\setotherlanguage{english}
+\makeatother % TODO https://github.com/fc7/polyglossia/issues/#issue/13
 \setcounter{IndexColumns}{2}
 \setcounter{tocdepth}{2}
 \let\oldusage\usage
@@ -117,12 +120,13 @@
 %
 % Pēdējos gados ir parādījušies rīki, kas ievērojami atvieglo dažādu valodu
 % lietošanu \LaTeX{} sistēmā. Pirmkārt, tas ir \XeTeX{} dzinis~\cite{xetex},
-% kas strādā ar Unicode tekstu un liek aizmirst par ievada un fontu kodējumiem.
-% Otrkārt, \TeX{} pasaulei kļuvuši pieejami daudzi fonti, kas satur plašu
-% Unicode simbolu klāstu. Tādi ir, piemēram, Latin Modern~\cite{lm} un Computer
-% Modern Unicode~\cite{cmu}. Šie jauninājumi atrisināja daudzas tehniskas
-% problēmas, ar kurām saskarās valodu atbalsta pakotņu autori pirms tam~---
-% dažreiz pat labākā veidā.
+% kas strādā ar \textenglish{Unicode} tekstu un liek aizmirst par ievada un
+% fontu kodējumiem. Otrkārt, \TeX{} pasaulei kļuvuši pieejami daudzi fonti, kas
+% satur plašu \textenglish{Unicode} simbolu klāstu. Tādi ir, piemēram,
+% \textenglish{Latin Modern}~\cite{lm} un \textenglish{Computer Modern
+% Unicode}~\cite{cmu}. Šie jauninājumi atrisināja daudzas tehniskas problēmas,
+% ar kurām saskarās valodu atbalsta pakotņu autori pirms tam~--- dažreiz pat
+% labākā veidā.
 %
 % Valodas atbalstu var iedalīt sekojošajās galvenajās kategorijās:
 % \begin{inparaenum}[(a)]
