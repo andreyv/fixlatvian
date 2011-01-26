@@ -238,6 +238,23 @@
 %   \end{tabular}
 % \end{table}
 %
+% \subsection{Nepareizs teksts virsrakstos}
+% Lietojot pakotnes, kuras \pack{FixLatvian} vēl nepazīst, var saskarties ar
+% nepārtulkotiem vai nepilnīgiem virsrakstiem «peldošajos» blokos. Šajā
+% gadījumā autoram pašam ir jāmaina virsraksta nosaukums. Ieteicams vērsties
+% pie attiecīgās pakotnes dokumentācijas.
+%
+% Piemēram, ja bloka nosaukums ir |something|, tad, iespējams, tā virsraksta
+% tekstu var pielāgot ar komandu
+% \begin{example}
+%   |\renewcommand{\somethingname}{tulkojums}|
+% \end{example}
+% vai arī, ja šis bloks tiek veidots ar \pack{float} pakotnes palīdzību, ar
+% komandu
+% \begin{example}
+%   |\floatname{something}{tulkojums}|
+% \end{example}
+%
 % \section{Citu pakotņu atbalsts}
 % \label{sec:packsupport}
 % Šī pakotne ir savietojama ar
