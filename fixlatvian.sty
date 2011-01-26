@@ -149,8 +149,11 @@
   \FixL@inpackage{#1}{%
     \expandafter\renewcommand\csname #2\endcsname{#3}%
   }}
+\FixL@inpackage{float}{\captionsetup[ruled]{labelformat=latvian}}
+\FixL@inpackage{float}{\renewcommand{\floatname}[2]{%
+  \expandafter\def\csname #1name\endcsname{#2}}}
 \FixL@translate{algorithm}{listalgorithmname}{Algoritmu saraksts}
-\FixL@inpackage{algorithm}{\floatname{algorithm}{Algoritms}}
+\FixL@inpackage{algorithm}{\floatname{algorithm}{algoritms}}
 \FixL@translate{amsthm}{proofname}{Pierādījums}
 \FixL@translate{appendix}{appendixtocname}{Pielikumi}
 \newcommand{\FixL@doc@glossaryname}{Izmaiņu saraksts}

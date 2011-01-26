@@ -246,6 +246,7 @@
 %   \pack{appendix},
 %   \pack{caption},
 %   \pack{doc},
+%   \pack{float},
 %   \pack{hyperref},
 %   \pack{listings}
 % pakotnēm.
@@ -521,7 +522,7 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \subsubsection{<<Peldošo>> bloku virsraksti}
+% \subsubsection{«Peldošo» bloku virsraksti}
 % Izmaina virsraksta pirmās daļas atdalītāju.
 %    \begin{macrocode}
 \DeclareCaptionLabelSeparator{period@}{.\@\space}
@@ -581,6 +582,21 @@
 % \end{macro}
 % \end{macro}
 %
+% \subsubsection{Pakotnes \pack{float} atbalsts}
+% Izmaina |ruled| virsrakstu stilu. Atdalītājpunktu nepievieno, jo |ruled|
+% virsraksta pirmā daļa jau tāpat ir treknrakstā.
+%    \begin{macrocode}
+\FixL@inpackage{float}{\captionsetup[ruled]{labelformat=latvian}}
+%    \end{macrocode}
+%
+% \begin{macro}{\floatname}
+% Pielāgo |\floatname| darbam ar \pack{caption}.
+%    \begin{macrocode}
+\FixL@inpackage{float}{\renewcommand{\floatname}[2]{%
+  \expandafter\def\csname #1name\endcsname{#2}}}
+%    \end{macrocode}
+% \end{macro}
+%
 % \subsubsection{Pakotnes \pack{algorithms} atbalsts}
 % \begin{macro}{\listalgorithmname}
 % Izmaina algoritmu saraksta nosaukumu.
@@ -591,7 +607,7 @@
 %
 % Izmaina algoritmu tekstu nosaukumu.
 %    \begin{macrocode}
-\FixL@inpackage{algorithm}{\floatname{algorithm}{Algoritms}}
+\FixL@inpackage{algorithm}{\floatname{algorithm}{algoritms}}
 %    \end{macrocode}
 %
 % \subsubsection{Pakotnes \pack{amsthm} atbalsts}
