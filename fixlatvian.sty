@@ -60,9 +60,10 @@
 \FixL@checkbefore{hyperref}
 \FixL@checkbefore{amsthm}
 \newcommand{\FixL@p}{.\@\nobreak}
+\newcommand{\FixL@bigspace}{\hspace{.66667em}}
 \CheckCommand*{\@seccntformat}[1]{\csname the#1\endcsname\quad}
 \renewcommand{\@seccntformat}[1]{%
-  \csname the#1\endcsname\FixL@p\hspace{.66667em}}
+  \csname the#1\endcsname\FixL@p\FixL@bigspace}
 \let\FixL@old@numberline\numberline
 \renewcommand{\numberline}[1]{%
   \StrRight{#1}{1}[\FixL@tempa]%
@@ -125,6 +126,13 @@
   }}
 \AtBeginDocument{\FixL@fix@part{
   \@ifpackageloaded{hyperref}{H@old@part}{@part}}}
+\patchcmd{\ps@headings}{\@chapapp\ \thechapter}{%
+  \thechapter\FixL@p\space\@chapapp}{}{\FixL@patchfailed{\chaptermark}}
+\patchcmd{\ps@headings}{\thesection\quad}{%
+  \thesection\FixL@p\FixL@bigspace}{}{\FixL@patchfailed{\sectionmark}}
+\patchcmd{\ps@headings}{\thesubsection\quad}{%
+  \thesubsection\FixL@p\FixL@bigspace}{}{%
+  \FixL@patchfailed{\subsectionmark}}
 \DeclareCaptionLabelSeparator{period@}{.\@\space}
 \captionsetup{labelsep=period@}
 \DeclareCaptionLabelFormat{latvian}{#2\FixL@p\space #1}

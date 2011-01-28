@@ -379,6 +379,14 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\FixL@bigspace}
+% Vietās, kur pēc numura oriģināli tiek lietots |\quad|, izmanto mazāku
+% atstarpi, lai kompensētu punkta radīto tukšumu.
+%    \begin{macrocode}
+\newcommand{\FixL@bigspace}{\hspace{.66667em}}
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{\@seccntformat}
 % Pievieno punktu sekciju u.\,c.\ numuriem virsrakstos. |\@seccntformat|
 % komandas oriģinālā definīcija atrodas \texttt{tex/latex/base/latex.ltx}
@@ -386,7 +394,7 @@
 %    \begin{macrocode}
 \CheckCommand*{\@seccntformat}[1]{\csname the#1\endcsname\quad}
 \renewcommand{\@seccntformat}[1]{%
-  \csname the#1\endcsname\FixL@p\hspace{.66667em}}
+  \csname the#1\endcsname\FixL@p\FixL@bigspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -534,6 +542,24 @@
 \AtBeginDocument{\FixL@fix@part{
   \@ifpackageloaded{hyperref}{H@old@part}{@part}}}
 %    \end{macrocode}
+% \end{macro}
+%
+% \subsubsection{Virsraksti galvenē un kājenē}
+% \begin{macro}{\chaptermark}
+% \begin{macro}{\sectionmark}
+% \begin{macro}{\subsectionmark}
+% Pielāgo noklusēto nodaļu un apakšnodaļu ierakstu noformējumu.
+%    \begin{macrocode}
+\patchcmd{\ps@headings}{\@chapapp\ \thechapter}{%
+  \thechapter\FixL@p\space\@chapapp}{}{\FixL@patchfailed{\chaptermark}}
+\patchcmd{\ps@headings}{\thesection\quad}{%
+  \thesection\FixL@p\FixL@bigspace}{}{\FixL@patchfailed{\sectionmark}}
+\patchcmd{\ps@headings}{\thesubsection\quad}{%
+  \thesubsection\FixL@p\FixL@bigspace}{}{%
+  \FixL@patchfailed{\subsectionmark}}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
 % \end{macro}
 %
 % \subsubsection{«Peldošo» bloku virsraksti}
