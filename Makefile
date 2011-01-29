@@ -9,37 +9,48 @@
 #
 
 # Package name
-PACKAGE    = fixlatvian
+PACK       = fixlatvian
+
+# Files to generate
+FILES      = $(PACK).sty lv.ist
 
 # Program names
 LATEX     ?= xelatex -halt-on-error
 MAKEINDEX ?= makeindex
+KPSEWHICH ?= kpsewhich
 
 ###############################################################################
+
+# Need to inhibit parallelism to avoid double .ins processing
+.NOTPARALLEL:
 
 .DELETE_ON_ERROR:
 
 .PHONY: all clean clean-all
 
-all: $(PACKAGE).sty $(PACKAGE).pdf
+all: $(FILES) $(PACK).pdf
 
-$(PACKAGE).sty: $(PACKAGE).ins $(PACKAGE).dtx
+$(FILES): $(PACK).ins $(PACK).dtx
 	$(LATEX) $<
 
+gind.lv.ist: lv.ist
+	cat $$($(KPSEWHICH) gind.ist) $< > $@
+
 define extra-latex-pass
-$(MAKEINDEX) -s gglo.ist -o $(PACKAGE).gls $(PACKAGE).glo
-$(MAKEINDEX) -s extra/gind.lv.ist -o $(PACKAGE).ind $(PACKAGE).idx
+$(MAKEINDEX) -s gglo.ist -o $(PACK).gls $(PACK).glo
+$(MAKEINDEX) -s gind.lv.ist -o $(PACK).ind $(PACK).idx
 $(LATEX) $<
 endef
-$(PACKAGE).pdf: $(PACKAGE).dtx $(PACKAGE).sty extra/gind.lv.ist
+$(PACK).pdf: $(PACK).dtx $(PACK).sty gind.lv.ist
 	$(LATEX) $<
 	$(extra-latex-pass)
 	$(extra-latex-pass)
 
 clean:
-	$(RM) $(addprefix $(PACKAGE),.aux .glo .gls .idx .ilg .ind .log .out .toc)
+	$(RM) $(addprefix $(PACK),.aux .glo .gls .idx .ilg .ind .log .out .toc)
+	$(RM) gind.lv.ist
 
 clean-all: clean
-	$(RM) $(PACKAGE).sty $(PACKAGE).pdf
+	$(RM) $(FILES) $(PACK).pdf
 
 ###############################################################################

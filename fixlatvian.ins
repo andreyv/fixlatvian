@@ -36,7 +36,10 @@ and version 1.2 or later is part of all distributions of LaTeX version
 \endpreamble
 
 \askforoverwritefalse
-\generate{\file{fixlatvian.sty}{\from{fixlatvian.dtx}{package}}}
+\generate{
+  \file{fixlatvian.sty}{\from{fixlatvian.dtx}{package}}
+  \nopostamble
+  \file{lv.ist}{\from{fixlatvian.dtx}{ist}}}
 
 \obeyspaces
 \Msg{*************************************************************}
@@ -45,6 +48,11 @@ and version 1.2 or later is part of all distributions of LaTeX version
 \Msg{* file into a directory searched by TeX:                    *}
 \Msg{*                                                           *}
 \Msg{*     fixlatvian.sty                                        *}
+\Msg{*                                                           *}
+\Msg{* Also move the following file into a directory searched by *}
+\Msg{* MakeIndex:                                                *}
+\Msg{*                                                           *}
+\Msg{*     lv.ist                                                *}
 \Msg{*                                                           *}
 \Msg{* To produce the documentation run the file fixlatvian.dtx  *}
 \Msg{* through LaTeX.                                            *}

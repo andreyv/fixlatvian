@@ -18,13 +18,17 @@
 %
 % \iffalse
 %<package>\NeedsTeXFormat{LaTeX2e}
+%<*driver|package>
 \RequirePackage{svn-prov}
+%</driver|package>
 %<*driver>
 \ProvidesFileSVN
 %</driver>
 %<package>\ProvidesPackageSVN
+%<*driver|package>
   {$Id$}
   [v0+r\Rev Improved Latvian support]
+%</driver|package>
 %<package>\DefineFileInfoSVN\relax
 %
 %<*driver>
@@ -51,10 +55,17 @@
 }
 \VerbatimFootnotes
 
+\renewcommand{\filesep}{\thesection}
+\makeatletter
+\@addtoreset{CodelineNo}{section}
+\makeatother
+\newcommand{\BeginFileSections}{\appendix}
+
 \providecommand{\email}[1]{\href{mailto:#1}{\nolinkurl{<#1>}}}
 \newenvironment{example}{\begin{quote}}{\end{quote}}
 \newcommand{\optstar}{\meta{\textnormal{\texttt{*}}}}
 \newcommand{\pack}[1]{\mbox{\textsf{#1}}}
+\newcommand{\sys}[1]{\texttt{#1}}
 \providecommand{\MakeIndex}{\textit{Make\-Index}}
 
 \DisableCrossrefs
@@ -145,7 +156,7 @@
 % pielāgo vairākas pakotnes darbam ar latviešu valodu. Tās mērķis ir ļaut
 % izveidot dokumentus, kas atbilstu latviešu valodā pieņemtajam noformējumam
 % gan dokumenta struktūras, gan teksta līmenī. Lai lietotu šo pakotni,
-% dokuments ir jāapstrādā ar \texttt{xelatex} komandu.
+% dokuments ir jāapstrādā ar \sys{xelatex} komandu.
 %
 % Patlaban lielā mērā tiek atbalstītas standarta \LaTeX{} dokumentu klases un
 % dažas pakotnes. Tiek laipni lūgtas idejas un ierosinājumi par citu dokumentu
@@ -217,6 +228,11 @@
 %
 % Komatu tagad var izmantot kā skaitļu decimāldaļas atdalītāju.
 %
+% \subsection{Rādītāja lietošana}
+% Daži \MakeIndex{} stili pirms vārdu grupām rādītājā liek grupu nosaukumus.
+% Ir pieejama \sys{lv.ist} stila datne ar šiem nosaukumiem latviešu valodā.
+% Lai to lietotu, tā ir jāapvieno kopā ar pamata stilu vienā datnē.
+%
 % \section{Padomi darbā}
 % \subsection{Pēdiņu ievads}
 % \XeTeX{} dzinis piedāvā kombinācijas dažādu pēdiņu ievadam, tāpat kā ar
@@ -286,6 +302,8 @@
 %       \url{http://www.tex.ac.uk/cgi-bin/texfaq2html?label=footnpp}
 %   \end{thebibliography}
 % }
+%
+% \BeginFileSections
 %
 % \section{Realizācija}
 % \subsection{Sagatavošanās darbam}
@@ -389,8 +407,7 @@
 %
 % \begin{macro}{\@seccntformat}
 % Pievieno punktu sekciju u.\,c.\ numuriem virsrakstos. |\@seccntformat|
-% komandas oriģinālā definīcija atrodas \texttt{tex/latex/base/latex.ltx}
-% datnē.
+% komandas oriģinālā definīcija atrodas \sys{tex/latex/base/latex.ltx} datnē.
 %    \begin{macrocode}
 \CheckCommand*{\@seccntformat}[1]{\csname the#1\endcsname\quad}
 \renewcommand{\@seccntformat}[1]{%
@@ -692,9 +709,6 @@
 % \end{macro}
 % \end{macro}
 %
-% Ir pieejama arī latviskota \MakeIndex{} stila datne \pack{doc}
-% rādītāja izveidei.
-%
 % \subsubsection{Pakotnes \pack{listings} atbalsts}
 % \begin{macro}{\lstlistlistingname}
 % Izmaina pirmkoda tekstu saraksta nosaukumu.
@@ -712,5 +726,19 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \section{\MakeIndex{} stila datne}
+% \iffalse
+%<ist>%% $Id$
+% \fi
+%
+% Definē latviešu virsrakstus rādītāja ailēm.
+%    \begin{macrocode}
+%<*ist>
+symhead_positive "Simboli"
+symhead_negative "simboli"
+numhead_positive "Skaitļi"
+numhead_negative "skaitļi"
+%</ist>
+%    \end{macrocode}
+%
 % \Finale
-\endinput
