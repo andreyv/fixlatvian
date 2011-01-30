@@ -4,8 +4,7 @@
 #
 # Requires GNU Make.
 #
-# Copyright (C) Andrey Vihrov <andrey.vihrov@gmail.com>, 2010
-# Copyright (C) Madars Virza <madars@gmail.com>, 2010
+# Copyright (C) Andrey Vihrov <andrey.vihrov@gmail.com>, 2010-2011
 #
 
 # Package name
