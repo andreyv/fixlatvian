@@ -26,7 +26,7 @@
 %<package>\ProvidesPackageSVN
 %<*driver|package>
   {$Id$}
-  [v0+r\Rev Improved Latvian support]
+  [v1+r\Rev Improved Latvian support]
 %</driver|package>
 %<package>\DefineFileInfoSVN\relax
 %
@@ -98,13 +98,12 @@
 %   Right brace   \}     Tilde         \~}
 %
 %
-% ^^A \changes{v1}{2099/01/01}{Sākuma versija}
+% \changes{v1}{2011/01/30}{Sākuma versija}
 %
 % \GetFileInfoSVN{fixlatvian}
 %
-% ^^A TODO As long as there is no stable version and the PDF is kept in SVN,
-% ^^A file info will lag one revision behind, so disable it for now
-% \title{\pack{FixLatvian} pakotne}^^A\thanks{Versija~\fileversion{} (\filedate).}}
+% \title{\pack{FixLatvian} pakotne\texorpdfstring{^^A
+%   \thanks{Versija~\fileversion{} (\filedate).}}{}}
 % \author{Andrejs Vihrovs\texorpdfstring{ \email{andrey.vihrov@gmail.com}}{}}
 % \makeatletter
 % \hypersetup{pdftitle={\@title},pdfauthor={\@author},^^A
