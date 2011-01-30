@@ -105,7 +105,11 @@
 % ^^A TODO As long as there is no stable version and the PDF is kept in SVN,
 % ^^A file info will lag one revision behind, so disable it for now
 % \title{\pack{FixLatvian} pakotne}^^A\thanks{Versija~\fileversion{} (\filedate).}}
-% \author{Andrejs Vihrovs \email{andrey.vihrov@gmail.com}}
+% \author{Andrejs Vihrovs\texorpdfstring{ \email{andrey.vihrov@gmail.com}}{}}
+% \makeatletter
+% \hypersetup{pdftitle={\@title},pdfauthor={\@author},^^A
+%   pdfkeywords={latex latviešu valodā, latex latviski, latex latviskošana}}
+% \makeatother
 %
 % \maketitle
 %
