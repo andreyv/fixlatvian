@@ -17,6 +17,7 @@ FILES      = $(PACK).sty lv.ist
 LATEX     ?= xelatex -halt-on-error
 MAKEINDEX ?= makeindex
 KPSEWHICH ?= kpsewhich
+PDFOPT    ?= pdfopt
 
 ###############################################################################
 
@@ -44,6 +45,8 @@ $(PACK).pdf: $(PACK).dtx $(PACK).sty gind.lv.ist
 	$(LATEX) $<
 	$(extra-latex-pass)
 	$(extra-latex-pass)
+	$(PDFOPT) $@ $@.tmp
+	mv $@.tmp $@
 
 clean:
 	$(RM) $(addprefix $(PACK),.aux .glo .gls .idx .ilg .ind .log .out .toc)
