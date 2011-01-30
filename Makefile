@@ -26,9 +26,11 @@ PDFOPT    ?= pdfopt
 
 .DELETE_ON_ERROR:
 
-.PHONY: all clean clean-all
+.PHONY: all package doc clean clean-all
 
-all: $(FILES) $(PACK).pdf
+all: package doc
+package: $(FILES)
+doc: $(PACK).pdf
 
 $(FILES): $(PACK).ins $(PACK).dtx
 	$(LATEX) $<
