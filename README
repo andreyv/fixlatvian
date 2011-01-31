@@ -1,0 +1,44 @@
+README for the FixLatvian package
+=================================
+
+Introduction
+---------------------------------
+The FixLatvian package is an attempt to improve Latvian language support in
+LaTeX, most prominently in standard document classes. It extends the
+functionality of the polyglossia package and as such requires XeTeX to work.
+The new features are implemented either directly or through use of other
+packages. Notable improvements are listed below:
+  * Latvian ordinal number format in headings, contents and labels;
+  * Latvian word order in part, chapter, float, theorem and other headings;
+  * additional translations, alphabetic numbering using the Latvian alphabet;
+  * per-page footnote numbers;
+  * comma decimal separator;
+  * support for a few other LaTeX packages.
+
+See the documentation (in Latvian) for detailed description and the source
+code. See http://code.google.com/p/fixlatvian/ for new releases, future plans
+and bug reports.
+
+Installation
+---------------------------------
+In simple cases placing the fixlatvian.sty file in the directory with the
+document top-level .tex file is sufficient. The package can then be loaded with
+the \usepackage{fixlatvian} command. Alternatively the package files can be
+copied to a local texmf tree.
+
+File list
+---------------------------------
+This package consists of the following files:
+  fixlatvian.dtx
+  fixlatvian.ins
+  Makefile
+  README
+  fixlatvian.pdf (generated)
+  fixlatvian.sty (generated)
+  lv.ist (generated)
+
+Copyright
+---------------------------------
+Copyright (C) Andrey Vihrov <andrey.vihrov@gmail.com>, 2011
+
+See the source for license information.
