@@ -42,11 +42,17 @@
 \usepackage[hyperindex=false]{hyperref}
 \usepackage{fixlatvian}
 
+\DisableCrossrefs
+\CodelineIndex
+\RecordChanges
+
 \setotherlanguage{english}
 \makeatother % TODO https://github.com/fc7/polyglossia/issues/#issue/13
 \setcounter{tocdepth}{2}
 \let\oldusage\usage
 \renewcommand{\usage}[1]{\oldusage{\hyperpage{#1}}}
+\let\oldglossary\glossary
+\renewcommand{\glossary}[1]{\oldglossary{#1|hyperpage}}
 \hypersetup{%
   bookmarksdepth=3,%
   colorlinks=true,%
@@ -66,10 +72,6 @@
 \newcommand{\pack}[1]{\mbox{\textsf{#1}}}
 \newcommand{\sys}[1]{\texttt{#1}}
 \providecommand{\MakeIndex}{\textit{Make\-Index}}
-
-\DisableCrossrefs
-\CodelineIndex
-\RecordChanges
 
 \begin{document}
   \DocInput{fixlatvian.dtx}
