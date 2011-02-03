@@ -225,12 +225,10 @@
 % citu <<peldošo>> bloku virsraksti.
 %
 % \subsection{Noformējuma īpatnības}
-% Pēc noklusējuma tiek uzstādīts vienāds atstarpju garums pēc visiem simboliem.
-% Lai pēc pieturzīmēm tiktu liktas lielākas atstarpes, kā pieņemts angļu
-% valodā, pakotnei jāpadod parametrs |nonfrenchspacing|:
-% \begin{example}
-%   |\usepackage[nonfrenchspacing]{fixlatvian}|
-% \end{example}
+% Tiek uzstādīts vienāds atstarpju garums pēc visiem simboliem. Lai atgrieztu
+% \LaTeX{} noklusēto variantu, kurā pēc pieturzīmēm liek lielākas atstarpes, kā
+% tradicionāli pieņemts angļu valodā, pēc pakotnes ielādes jālieto komanda
+% |\nonfrenchspacing|.
 %
 % \DescribeMacro{\footnote}
 % Zemteksta piezīmju numerācija tagad sākas no jauna katru lappusi.
@@ -336,17 +334,21 @@
 \RequirePackage{icomma}
 %    \end{macrocode}
 %
+% Definē un apstrādā pakotnes parametrus.
+%    \begin{macrocode}
+\ProcessOptions\relax
+%    \end{macrocode}
+%
 % Uzstāda latviešu valodu kā dokumenta valodu.
 %    \begin{macrocode}
 \@ifundefined{latvian@loaded}{\setdefaultlanguage{latvian}}{}
 %    \end{macrocode}
 %
-% Definē un apstrādā pakotnes parametrus.
+% \changes{svn}{2011/02/03}{Izņemti \string\verb+frenchspacing+ un
+%   \string\verb+nonfrenchspacing+ pa\-ra\-met\-ri} ^^A FIXME
+% Uzstāda vienādas atstarpes pēc visiem simboliem.
 %    \begin{macrocode}
-\DeclareOption{frenchspacing}{\frenchspacing}
-\DeclareOption{nonfrenchspacing}{\nonfrenchspacing}
-\ExecuteOptions{frenchspacing}
-\ProcessOptions\relax
+\frenchspacing
 %    \end{macrocode}
 %
 % \begin{macro}{\FixL@warning}
