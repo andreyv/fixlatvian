@@ -16,21 +16,30 @@
 % See the README for a list of files that constitute this work.
 %
 
-\input{docstrip}
+\input docstrip
 \keepsilent
+
+% Check if \BaseDirectory hasn't been called
+\def\ifnobasedir{\expandafter\ifx\csname basedir\endcsname\relax}
 
 \usedir{tex/xelatex/fixlatvian}
 
 \preamble
 \endpreamble
+\declarepostamble\noendinput
+\endpostamble
+
 \askforoverwritefalse
 \generate{
   \file{fixlatvian.sty}{\from{fixlatvian.dtx}{package}}
-  \nopostamble
+  \usepostamble\noendinput
+  \usedir{makeindex/fixlatvian}
   \file{lv.ist}{\from{fixlatvian.dtx}{ist}}}
 
+\begingroup
 \obeyspaces
 \Msg{*************************************************************}
+\ifnobasedir
 \Msg{*                                                           *}
 \Msg{* To finish the installation you have to move the following *}
 \Msg{* file into a directory searched by TeX:                    *}
@@ -41,6 +50,7 @@
 \Msg{* MakeIndex:                                                *}
 \Msg{*                                                           *}
 \Msg{*   lv.ist                                                  *}
+\fi
 \Msg{*                                                           *}
 \Msg{* To produce the documentation run the file fixlatvian.dtx  *}
 \Msg{* through LaTeX.                                            *}
@@ -48,5 +58,6 @@
 \Msg{* Happy TeXing!                                             *}
 \Msg{*                                                           *}
 \Msg{*************************************************************}
+\endgroup
 
 \endbatchfile
