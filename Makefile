@@ -4,7 +4,7 @@
 #
 # Requires GNU Make.
 #
-# Copyright (C) Andrey Vihrov <andrey.vihrov@gmail.com>, 2010--2011
+# Copyright (C) Andrey Vihrov <andrey.vihrov@gmail.com>, 2010-2011
 #
 # This work may be distributed and/or modified under the
 # conditions of the LaTeX Project Public License, either version 1.3
