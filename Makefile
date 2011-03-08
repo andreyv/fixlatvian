@@ -28,7 +28,7 @@ PACK       = fixlatvian
 FILES      = $(PACK).sty lv.ist
 
 # Program names
-LATEX     ?= xelatex -halt-on-error
+LATEX     ?= xelatex -interaction=nonstopmode
 MAKEINDEX ?= makeindex
 KPSEWHICH ?= kpsewhich
 PDFOPT    ?= pdfopt
