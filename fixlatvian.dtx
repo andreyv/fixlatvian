@@ -635,11 +635,17 @@
 % \end{macro}
 %
 % \subsubsection{\pack{appendix}}
+% \begin{macro}{\appendixpagename}
+% \changes{v1b}{2012/07/29}{Pievienots tulkojums}
 % \begin{macro}{\appendixtocname}
-% Izmaina pielikumu sadaļas virsrakstu saturā.
+% Izmaina pielikumu sadaļas virsrakstus tekstā un saturā.
 %    \begin{macrocode}
-\FL@inpkg{appendix}{\renewcommand{\appendixtocname}{Pielikumi}}
+\FL@inpkg{appendix}{%
+  \renewcommand{\appendixpagename}{Pielikumi}%
+  \renewcommand{\appendixtocname}{Pielikumi}%
+}
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 %
 % \subsubsection{\pack{doc}}
