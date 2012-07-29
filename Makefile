@@ -1,31 +1,30 @@
 ###############################################################################
 #
-# Makefile to build the package and documentation
+# Makefile to build the package and documentation (GNU Make required)
 #
-# Requires GNU Make.
-#
-# Copyright (C) Andrey Vihrov <andrey.vihrov@gmail.com>, 2010-2011
+# Copyright (C) 2010-2012 Andrey Vihrov <andrey.vihrov@gmail.com>
 #
 # This work may be distributed and/or modified under the
 # conditions of the LaTeX Project Public License, either version 1.3
 # of this license or (at your option) any later version.
 # The latest version of this license is in
-#
 #   http://www.latex-project.org/lppl.txt
-#
 # and version 1.3 or later is part of all distributions of LaTeX
 # version 2005/12/01 or later.
 #
 # This work has the LPPL maintenance status `maintained'.
 #
+# The Current Maintainer of this work is
+# Andrey Vihrov <andrey.vihrov@gmail.com>.
+#
 # See the README for a list of files that constitute this work.
 #
 
 # Package name
-PACK       = fixlatvian
+PACKAGE    = fixlatvian
 
 # Files to generate
-FILES      = $(PACK).sty lv.ist
+FILES      = $(PACKAGE).sty lv.ist
 
 # Program names
 LATEX     ?= xelatex -interaction=nonstopmode -halt-on-error
@@ -35,29 +34,28 @@ PDFOPT    ?= pdfopt
 
 ###############################################################################
 
-# Need to inhibit parallelism to avoid double .ins processing
-.NOTPARALLEL:
-
 .DELETE_ON_ERROR:
 
 .PHONY: all package doc clean clean-all
 
 all: package doc
 package: $(FILES)
-doc: $(PACK).pdf
+doc: $(PACKAGE).pdf
 
-$(FILES): $(PACK).ins $(PACK).dtx
+F = $(firstword $(FILES))
+$(F): $(PACKAGE).ins $(PACKAGE).dtx
 	$(LATEX) $<
+$(filter-out $(F),$(FILES)): $(F)
 
 gind.lv.ist: lv.ist
 	cat $$($(KPSEWHICH) gind.ist) $< > $@
 
 define extra-latex-pass
-$(MAKEINDEX) -s gglo.ist -o $(PACK).gls $(PACK).glo
-$(MAKEINDEX) -s gind.lv.ist -o $(PACK).ind $(PACK).idx
+$(MAKEINDEX) -s gglo.ist -o $(PACKAGE).gls $(PACKAGE).glo
+$(MAKEINDEX) -s gind.lv.ist -o $(PACKAGE).ind $(PACKAGE).idx
 $(LATEX) $<
 endef
-$(PACK).pdf: $(PACK).dtx $(PACK).sty gind.lv.ist
+$(PACKAGE).pdf: $(PACKAGE).dtx $(PACKAGE).sty gind.lv.ist
 	$(LATEX) $<
 	$(extra-latex-pass)
 	$(extra-latex-pass)
@@ -65,10 +63,10 @@ $(PACK).pdf: $(PACK).dtx $(PACK).sty gind.lv.ist
 	mv $@.tmp $@
 
 clean:
-	$(RM) $(addprefix $(PACK),.aux .glo .gls .idx .ilg .ind .log .out .toc)
+	$(RM) $(addprefix $(PACKAGE).,aux glo gls idx ilg ind log out toc hd)
 	$(RM) gind.lv.ist
 
 clean-all: clean
-	$(RM) $(FILES) $(PACK).pdf
+	$(RM) $(FILES) $(PACKAGE).pdf
 
 ###############################################################################
