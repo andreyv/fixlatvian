@@ -687,6 +687,13 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \changes{v1b}{2012/07/29}{PDF valodas identifikators ir \texttt{lv}}
+% Uzstāda PDF valodas identifikatoru. To nevar darīt ar |\AtBeginDocument|, jo
+% tajā laikā PDF informācija jau būs ierakstīta izvada failā.
+%    \begin{macrocode}
+\@ifpackageloaded{hyperref}{\hypersetup{pdflang=lv}}{}
+%    \end{macrocode}
+%
 % \subsubsection{\pack{listings}}
 %    \begin{macrocode}
 \FL@inpkg{listings}{%
