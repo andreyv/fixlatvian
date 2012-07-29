@@ -220,7 +220,8 @@
 % \begin{macro}{\partname}
 % \begin{macro}{\tablename}
 % \begin{macro}{\seename}
-% ^^A TODO \glossaryname
+% \begin{macro}{\glossaryname}
+% \changes{v1b}{2012/07/29}{Pievienots tulkojums}
 % Pielāgo dažus \LaTeX\ nosaukumus.
 %    \begin{macrocode}
 \appto{\captionslatvian}{%
@@ -231,8 +232,10 @@
   \renewcommand{\partname}{daļa}%
   \renewcommand{\tablename}{tabula}%
   \renewcommand{\seename}{sk.\@}%
+  \def\glossaryname{Glosārijs}%
 }
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 % \end{macro}
 % \end{macro}
@@ -648,7 +651,7 @@
 %    \begin{macrocode}
 \FL@inpkg{doc}{%
   \renewcommand{\generalname}{Vispārīgi}%
-  \def\glossaryname{Izmaiņu saraksts}%
+  \renewcommand{\glossaryname}{Izmaiņu saraksts}%
   \GlossaryPrologue{%
     \section*{\glossaryname}%
     \markboth{\glossaryname}{\glossaryname}%
