@@ -476,7 +476,8 @@
 % \begin{macro}{\@begintheorem}
 % \begin{macro}{\@opargbegintheorem}
 % Nomaina vārdu secību arī teorēmu virsrakstos. Ir jārīkojas dažādi atkarībā
-% no tā, vai ir ielādēta \pack{amsthm} pakotne.
+% no tā, vai ir ielādēta \pack{amsthm} pakotne. \pack{nameref} pakotne
+% pārdefinē |\@opargbegintheorem|, un tas arī jāņem vērā.
 %    \begin{macrocode}
 \newcommand{\FL@thmnumber}[1]{#1\FL@p}
 \begingroup
@@ -487,7 +488,9 @@
       \FL@patch{\@begintheorem}{\thmnumber\@iden}{\thmnumber\FL@thmnumber}%
     }{%
       \FL@patch{\@begintheorem}{#1\ #2}{#2\FL@p\space #1}%
-      \FL@patch{\@opargbegintheorem}{#1\ #2}{#2\FL@p\space #1}%
+      \expandafter\FL@patch\csname\@ifpackageloaded{nameref}%
+        {NRorg@opargbegintheorem}{@opargbegintheorem}\endcsname
+        {#1\ #2}{#2\FL@p\space #1}%
     }}
 \endgroup
 %    \end{macrocode}
